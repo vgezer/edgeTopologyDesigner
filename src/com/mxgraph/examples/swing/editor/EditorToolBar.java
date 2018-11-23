@@ -193,9 +193,11 @@ public class EditorToolBar extends JToolBar
 		add(zoomCombo);
 		
 		addSeparator();
-		
+
 		add(editor.bind("setServerId", mxGraphActions.getServerIdChangeAction(),
 				"/com/mxgraph/examples/swing/images/wrench.gif"));
+		add(editor.bind("setWarningMessage", mxGraphActions.getWarningMessageChangeAction(),
+				"/com/mxgraph/examples/swing/images/rule.gif"));
 
 		// Sets the zoom in the zoom combo the current value
 		mxIEventListener scaleTracker = new mxIEventListener()

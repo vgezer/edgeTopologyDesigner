@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import com.mxgraph.swing.util.mxCellOverlay;
+import com.mxgraph.swing.util.mxICellOverlay;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
@@ -454,8 +456,6 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 		{
 			boolean parentChanged = parent != getParent(child);
 			execute(new mxChildChange(this, parent, child, index));
-			execute(new mxServerIdChange(this, child, index));
-
 			// Maintains the edges parents by moving the edges
 			// into the nearest common ancestor of its
 			// terminals
@@ -502,25 +502,33 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 						cells = new Hashtable<String, Object>();
 					}
 					
-					//TODO
 					if (mxc.getValue() != null)
 					{
 						String[] words=((String) mxc.getValue()).split("#");
+						boolean serverAdded = false;
 						switch(words[0]){ 
-				        case "Edge Node ": 
-				        	mxc.setValue(words[0].concat("#" + edgeNodeId++));
-				            break; 
-				        case "User ": 
-				        	mxc.setValue(words[0].concat("#" + userId++));
-				            break; 
-				        case "Cloud ": 
-				        	mxc.setValue(words[0].concat("#" + coudId++));
-				            break; 
-				        case "Raspberry Pi ": 
-				        	mxc.setValue(words[0].concat("#" + raspberryPiId++));
-				            break; 
-				        default: 
-				        } 
+					        case "Edge Node ": 
+					        	mxc.setValue(words[0].concat("#" + edgeNodeId++));
+					        	serverAdded = true;
+					            break; 
+					        case "User ": 
+					        	mxc.setValue(words[0].concat("#" + userId++));
+					        	serverAdded = true;
+					            break; 
+					        case "Cloud ": 
+					        	mxc.setValue(words[0].concat("#" + coudId++));
+					        	serverAdded = true;
+					            break; 
+					        case "Raspberry Pi ": 
+					        	mxc.setValue(words[0].concat("#" + raspberryPiId++));
+					        	serverAdded = true;
+					            break; 
+					        default: 
+				        }
+						if(serverAdded) {
+							execute(new mxServerIdChange(this, mxc, (nextId-1)));
+							setWarningMessage(mxc, mxResources.get("usingDefault") + ": " + (nextId-1));
+						}
 					}
 
 					cells.put(mxc.getId(), cell);
@@ -984,6 +992,17 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 		return value;
 
 	}
+	
+	public Object getWarningMessage(Object cell)
+	{
+		return (cell instanceof mxICell) ? ((mxICell) cell).getWarningmessage() : null;
+	}
+
+	public Object setWarningMessage(Object cell, Object value)
+	{
+		execute(new mxWarningMessageChange(this, cell, value));
+		return value;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.mxgraph.model.mxIGraphModel#setValue(Object, Object)
@@ -1013,6 +1032,14 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 	{
 		Object oldValue = ((mxICell) cell).getServerid();
 		((mxICell) cell).setServerid(value);
+
+		return oldValue;
+	}
+	
+	protected Object warningForCellChanged(Object cell, Object value)
+	{
+		Object oldValue = ((mxICell) cell).getWarningmessage();
+		((mxICell) cell).setWarningmessage(value);
 
 		return oldValue;
 	}
@@ -2431,6 +2458,93 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 		{
 			value = previous;
 			previous = ((mxGraphModel) model).serverIdForCellChanged(cell,
+					previous);
+		}
+
+	}
+	
+	public static class mxWarningMessageChange extends mxAtomicGraphModelChange
+	{
+
+		/**
+		 *
+		 */
+		protected Object cell, value, previous;
+
+		/**
+		 * 
+		 */
+		public mxWarningMessageChange()
+		{
+			this(null, null, null);
+		}
+
+		/**
+		 * 
+		 */
+		public mxWarningMessageChange(mxGraphModel model, Object cell, Object value)
+		{
+			super(model);
+			this.cell = cell;
+			this.value = value;
+			this.previous = this.value;
+		}
+
+		/**
+		 * 
+		 */
+		public void setCell(Object value)
+		{
+			cell = value;
+		}
+
+		/**
+		 * @return the cell
+		 */
+		public Object getCell()
+		{
+			return cell;
+		}
+
+		/**
+		 * 
+		 */
+		public void setValue(Object value)
+		{
+			this.value = value;
+		}
+
+		/**
+		 * @return the value
+		 */
+		public Object getValue()
+		{
+			return value;
+		}
+
+		/**
+		 * 
+		 */
+		public void setPrevious(Object value)
+		{
+			previous = value;
+		}
+
+		/**
+		 * @return the previous
+		 */
+		public Object getPrevious()
+		{
+			return previous;
+		}
+
+		/**
+		 * Changes the root of the model.
+		 */
+		public void execute()
+		{
+			value = previous;
+			previous = ((mxGraphModel) model).warningForCellChanged(cell,
 					previous);
 		}
 

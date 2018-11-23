@@ -234,6 +234,9 @@ public interface mxIGraphModel
 	
 	Object setServerId(Object cell, Object value);
 	Object getServerId(Object cell);
+	
+	Object setWarningMessage(Object cell, Object value);
+	Object getWarningMessage(Object cell);
 
 	/**
 	 * Returns the geometry of the given cell.

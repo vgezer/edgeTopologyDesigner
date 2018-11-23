@@ -31,4 +31,6 @@ public interface mxICellEditor
 	 */
 	public void stopEditing(boolean cancel);
 
+	public void startWarningMessageChange(Object cell, EventObject evt);
+
 }

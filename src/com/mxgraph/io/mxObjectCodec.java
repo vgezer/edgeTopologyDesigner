@@ -344,13 +344,6 @@ public class mxObjectCodec
 		encodeElements(enc, obj, node);
 	}
 
-	protected void encodeServerId(mxCodec enc, Object obj, Node node, String value)
-	{
-		mxCodec.setAttribute(node, "serverid", value);
-		encodeFields(enc, obj, node);
-		encodeElements(enc, obj, node);
-	}
-
 	/**
 	 * Encodes the declared fields of the given object into the given node.
 	 * 

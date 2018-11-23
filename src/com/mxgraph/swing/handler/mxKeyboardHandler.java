@@ -62,6 +62,7 @@ public class mxKeyboardHandler
 
 			map.put(KeyStroke.getKeyStroke("F2"), "edit");
 			map.put(KeyStroke.getKeyStroke("F3"), "setServerId");
+			map.put(KeyStroke.getKeyStroke("F4"), "setWarningMessage");
 			map.put(KeyStroke.getKeyStroke("DELETE"), "delete");
 			map.put(KeyStroke.getKeyStroke("UP"), "selectParent");
 			map.put(KeyStroke.getKeyStroke("DOWN"), "selectChild");
@@ -98,6 +99,7 @@ public class mxKeyboardHandler
 
 		map.put("edit", mxGraphActions.getEditAction());
 		map.put("setServerId", mxGraphActions.getServerIdChangeAction());
+		map.put("setWarningMessage", mxGraphActions.getWarningMessageChangeAction());
 		map.put("delete", mxGraphActions.getDeleteAction());
 		map.put("home", mxGraphActions.getHomeAction());
 		map.put("enterGroup", mxGraphActions.getEnterGroupAction());

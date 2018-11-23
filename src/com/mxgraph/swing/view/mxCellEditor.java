@@ -34,6 +34,7 @@ import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxIGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxCellState;
 
@@ -105,6 +106,11 @@ public class mxCellEditor implements mxICellEditor
 	 * 
 	 */
 	protected transient Object editingServerId;
+
+	/**
+	 * 
+	 */
+	protected transient Object editingWarningMessage;
 
 	/**
 	 * 
@@ -499,7 +505,8 @@ public class mxCellEditor implements mxICellEditor
 		trigger = evt;
 
 		String value = getServerIdValue(state, evt);
-		String input = (String) JOptionPane.showInputDialog(null, "Enter the Server ID: ", "Set property", JOptionPane.OK_CANCEL_OPTION, null,
+		String input = (String) JOptionPane.showInputDialog(null, mxResources.get("enterServerId"), mxResources.get("setProperty"), 
+				JOptionPane.OK_CANCEL_OPTION, null,
 		        null, value);
 		
         if (input == null) {
@@ -510,6 +517,33 @@ public class mxCellEditor implements mxICellEditor
         }
 	}
 
+	@Override
+	public void startWarningMessageChange(Object cell, EventObject evt) {
+		if (editingServerId != null)
+		{
+			stopWarningMessageChange(true);
+		}
+		
+		mxCellState state = graphComponent.getGraph().getView().getState(cell);
+		graphComponent.getEditingValue(state.getCell(), trigger);
+		
+		editingServerId = cell;
+		trigger = evt;
+
+		String value = getWarningMessageValue(state, evt);
+		String input = (String) JOptionPane.showInputDialog(null, mxResources.get("enterWarningMessage"), mxResources.get("setProperty"), 
+				JOptionPane.OK_CANCEL_OPTION, null,
+		        null, value);
+		graphComponent.setCellWarning(cell, input);
+
+        if (input == null) {
+        	setWarningMessageValue(state, evt, value);
+        }
+        else {
+        	setWarningMessageValue(state, evt, input);	
+        }
+	}
+	
 	/**
 	 * 
 	 */
@@ -571,6 +605,24 @@ public class mxCellEditor implements mxICellEditor
 			}
 		}
 
+	 public void stopWarningMessageChange(boolean cancel)
+		{
+			if (editingWarningMessage != null)
+			{
+				//scrollPane.transferFocusUpCycle();
+				Object cell = editingWarningMessage;
+				editingWarningMessage = null;
+
+				if (!cancel)
+				{
+					EventObject trig = trigger;
+					trigger = null;
+					graphComponent.warningMessageChanged(cell, getWarningMessageValue(null, trig), trig);
+				}
+				
+			}
+		}
+
 	/**
 	 * Gets the initial editing value for the given cell.
 	 */
@@ -586,6 +638,14 @@ public class mxCellEditor implements mxICellEditor
 	protected void setServerIdValue(mxCellState state, EventObject trigger, Object value)
 	{
 		graphComponent.setServerIdValue(state.getCell(), trigger, value);
+	}
+	protected String getWarningMessageValue(mxCellState state, EventObject trigger)
+	{
+		return graphComponent.getWarningMessageValue(state.getCell(), trigger);
+	}
+	protected void setWarningMessageValue(mxCellState state, EventObject trigger, Object value)
+	{
+		graphComponent.setWarningMessageValue(state.getCell(), trigger, value);
 	}
 	/**
 	 * Returns the current editing value.
@@ -720,5 +780,6 @@ public class mxCellEditor implements mxICellEditor
 			super.setLineLength(l);
 		}
 	}
+
 
 }

@@ -5317,6 +5317,18 @@ public class mxGraph extends mxEventSource
 	{
 		return model.setServerId(cell, value);
 	}
+	
+	public String getWarningMessage(Object cell)
+	{
+		Object result = model.getWarningMessage(cell);
+
+		return (result != null) ? result.toString() : "";
+	}
+	
+	public Object setWarningMessage(Object cell, Object value)
+	{
+		return model.setWarningMessage(cell, value);
+	}
 
 	/**
 	 * Returns a string or DOM node that represents the label for the given
@@ -5385,6 +5397,19 @@ public class mxGraph extends mxEventSource
 		}
 	}
 
+	public void warningMessageChanged(Object cell, Object value)
+	{
+		model.beginUpdate();
+		try
+		{
+			getModel().setWarningMessage(cell, value);
+		}
+		finally
+		{
+			model.endUpdate();
+		}
+	}
+	
 	/**
 	 * Returns true if the label must be rendered as HTML markup. The default
 	 * implementation returns <htmlLabels>.

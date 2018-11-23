@@ -26,8 +26,16 @@ public class mxGraphActions
 	 * 
 	 */
 	static final Action editAction = new EditAction("edit");
-	
+
+	/**
+	 * 
+	 */
 	static final Action serverIdChangeAction = new ServerIdChangeAction("serverIdChange");
+
+	/**
+	 * 
+	 */
+	static final Action warningMessageChangeAction = new WarningMessageChangeAction("warningMessageChange");
 
 	/**
 	 * 
@@ -162,6 +170,11 @@ public class mxGraphActions
 	
 	public static Action getServerIdChangeAction() {
 		return serverIdChangeAction;
+	}
+
+
+	public static Action getWarningMessageChangeAction() {
+		return warningMessageChangeAction;
 	}
 
 	/**
@@ -438,6 +451,36 @@ public class mxGraphActions
 			if (e.getSource() instanceof mxGraphComponent)
 			{
 				((mxGraphComponent) e.getSource()).startServerIdChange(null, null);
+			}
+		}
+
+	}
+
+	public static class WarningMessageChangeAction extends AbstractAction
+	{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 3758005103674908729L;
+
+		/**
+		 * 
+		 * @param name
+		 */
+		public WarningMessageChangeAction(String name)
+		{
+			super(name);
+		}
+
+		/**
+		 * 
+		 */
+		public void actionPerformed(ActionEvent e)
+		{
+			if (e.getSource() instanceof mxGraphComponent)
+			{
+				((mxGraphComponent) e.getSource()).startWarningMessageChange(null, null);
 			}
 		}
 

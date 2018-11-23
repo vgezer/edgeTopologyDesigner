@@ -597,8 +597,8 @@ public class EditorActions
 				mxGraphComponent graphComponent = editor.getGraphComponent();
 				mxGraph graph = graphComponent.getGraph();
 				FileFilter selectedFilter = null;
-				DefaultFileFilter xmlPngFilter = new DefaultFileFilter(".png",
-						"PNG+XML " + mxResources.get("file") + " (.png)");
+				DefaultFileFilter mxeFile = new DefaultFileFilter(".mxe",
+						"Edge Topology " + mxResources.get("file") + " (.mxe)");
 				FileFilter vmlFileFilter = new DefaultFileFilter(".html",
 						"VML " + mxResources.get("file") + " (.html)");
 				String filename = null;
@@ -624,16 +624,15 @@ public class EditorActions
 					JFileChooser fc = new JFileChooser(wd);
 
 					// Adds the default file format
-					FileFilter defaultFilter = xmlPngFilter;
+					FileFilter defaultFilter = mxeFile;
 					fc.addChoosableFileFilter(defaultFilter);
 
 					// Adds special vector graphics formats and HTML
-					fc.addChoosableFileFilter(new DefaultFileFilter(".mxe",
-							"mxGraph Editor " + mxResources.get("file")
-									+ " (.mxe)"));
 					fc.addChoosableFileFilter(new DefaultFileFilter(".txt",
 							"Graph Drawing " + mxResources.get("file")
 									+ " (.txt)"));
+					fc.addChoosableFileFilter(new DefaultFileFilter(".png",
+						"PNG+XML " + mxResources.get("file") + " (.png)"));
 					fc.addChoosableFileFilter(new DefaultFileFilter(".svg",
 							"SVG " + mxResources.get("file") + " (.svg)"));
 					fc.addChoosableFileFilter(vmlFileFilter);
@@ -773,7 +772,7 @@ public class EditorActions
 							bg = graphComponent.getBackground();
 						}
 
-						if (selectedFilter == xmlPngFilter
+						if (selectedFilter == mxeFile
 								|| (editor.getCurrentFile() != null
 										&& ext.equalsIgnoreCase("png") && !dialogShown))
 						{
@@ -1372,42 +1371,6 @@ public class EditorActions
 					{
 						model.endUpdate();
 					}
-				}
-			}
-		}
-	}
-
-	/**
-	 *
-	 */
-	@SuppressWarnings("serial")
-	public static class WarningAction extends AbstractAction
-	{
-		/**
-		 * 
-		 */
-		public void actionPerformed(ActionEvent e)
-		{
-			if (e.getSource() instanceof mxGraphComponent)
-			{
-				mxGraphComponent graphComponent = (mxGraphComponent) e
-						.getSource();
-				Object[] cells = graphComponent.getGraph().getSelectionCells();
-
-				if (cells != null && cells.length > 0)
-				{
-					String warning = JOptionPane.showInputDialog(mxResources
-							.get("enterWarningMessage"));
-
-					for (int i = 0; i < cells.length; i++)
-					{
-						graphComponent.setCellWarning(cells[i], warning);
-					}
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(graphComponent,
-							mxResources.get("noCellSelected"));
 				}
 			}
 		}

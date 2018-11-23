@@ -50,7 +50,6 @@ import com.mxgraph.examples.swing.editor.EditorActions.ToggleGridItem;
 import com.mxgraph.examples.swing.editor.EditorActions.ToggleOutlineItem;
 import com.mxgraph.examples.swing.editor.EditorActions.TogglePropertyItem;
 import com.mxgraph.examples.swing.editor.EditorActions.ToggleRulersItem;
-import com.mxgraph.examples.swing.editor.EditorActions.WarningAction;
 import com.mxgraph.examples.swing.editor.EditorActions.ZoomPolicyAction;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxGraphActions;
@@ -134,11 +133,11 @@ public class EditorMenuBar extends JMenuBar {
 
 		menu.addSeparator();
 
-		menu.add(editor.bind(mxResources.get("warning"), new WarningAction()));
-		menu.add(editor.bind(mxResources.get("edit") + " - F2", mxGraphActions.getEditAction()));
-		menu.add(editor.bind(mxResources.get("setServerId") + " - F3", mxGraphActions.getServerIdChangeAction(), 
+		menu.add(editor.bind(mxResources.get("edit") + " - [F2]", mxGraphActions.getEditAction()));
+		menu.add(editor.bind(mxResources.get("setServerId") + " - [F3]", mxGraphActions.getServerIdChangeAction(), 
 				"/com/mxgraph/examples/swing/images/wrench.gif"));
-
+		menu.add(editor.bind(mxResources.get("warning") + " - [F4]", mxGraphActions.getWarningMessageChangeAction(), 
+				"/com/mxgraph/examples/swing/images/rule.gif"));
 		// Creates the view menu
 		menu = add(new JMenu(mxResources.get("view")));
 

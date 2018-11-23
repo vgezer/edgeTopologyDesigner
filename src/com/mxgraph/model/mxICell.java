@@ -282,5 +282,18 @@ public interface mxICell
 	 *
 	 */
 	void setServerid(Object value);
+	
+	/**
+	 * Returns the warning message of this cell.
+	 *
+	 * @return Returns the warning message of this cell.
+	 */
+	Object getWarningmessage();
+
+	/**
+	 * Sets the warning message of this cell.
+	 *
+	 */
+	void setWarningmessage(Object value);
 
 }

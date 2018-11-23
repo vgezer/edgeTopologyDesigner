@@ -31,7 +31,7 @@ import org.w3c.dom.Node;
  * 
  * To add more than one edge label, add a child vertex with
  * a relative geometry. The x- and y-coordinates of that
- * geometry will have the same semantiv as the above for
+ * geometry will have the same semantics as the above for
  * edge labels.
  */
 public class mxCell implements mxICell, Cloneable, Serializable
@@ -56,6 +56,11 @@ public class mxCell implements mxICell, Cloneable, Serializable
 	 * Holds the server id. Default is null.
 	 */
 	protected Object serverid;
+
+	/**
+	 * Holds the warning message. Default is null.
+	 */
+	protected Object warningmessage;
 
 	/**
 	 * Holds the geometry. Default is null.
@@ -654,11 +659,23 @@ public class mxCell implements mxICell, Cloneable, Serializable
 		builder.append(value);
 		builder.append(", serverid=");
 		builder.append(serverid);
+		builder.append(", warningmessage=");
+		builder.append(warningmessage);
 		builder.append(", geometry=");
 		builder.append(geometry);
 		builder.append("]");
 		
 		return builder.toString();
+	}
+
+	@Override
+	public Object getWarningmessage() {
+		return warningmessage;
+	}
+
+	@Override
+	public void setWarningmessage(Object value) {
+		warningmessage = value;
 	}
 
 }

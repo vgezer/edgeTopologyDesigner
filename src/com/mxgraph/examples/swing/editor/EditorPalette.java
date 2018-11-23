@@ -264,7 +264,7 @@ public class EditorPalette extends JPanel
 		mxRectangle bounds = (mxGeometry) cell.getGeometry().clone();
 		final mxGraphTransferable t = new mxGraphTransferable(
 				new Object[] { cell }, bounds);
-		
+
 		// Scales the image if it's too large for the library
 		if (icon != null)
 		{

@@ -20,6 +20,8 @@ public class EditorPopupMenu extends JPopupMenu
 	{
 		boolean selected = !editor.getGraphComponent().getGraph()
 				.isSelectionEmpty();
+		boolean onlyOneSelected = (editor.getGraphComponent().getGraph()
+				.getSelectionCount() == 1) ? true: false;
 
 		add(editor.bind(mxResources.get("undo"), new HistoryAction(true),
 				"/com/mxgraph/examples/swing/images/undo.gif"));
@@ -62,13 +64,12 @@ public class EditorPopupMenu extends JPopupMenu
 
 		addSeparator();
 
-		add(
-				editor.bind(mxResources.get("edit"), mxGraphActions
-						.getEditAction())).setEnabled(selected);
-		add(
-				editor.bind(mxResources.get("setServerId"), mxGraphActions
-						.getServerIdChangeAction(),
-						"/com/mxgraph/examples/swing/images/wrench.gif")).setEnabled(selected);		
+		add(editor.bind(mxResources.get("edit"), mxGraphActions
+						.getEditAction())).setEnabled(onlyOneSelected);
+		add(editor.bind(mxResources.get("setServerId"), mxGraphActions.getServerIdChangeAction(),
+						"/com/mxgraph/examples/swing/images/wrench.gif")).setEnabled(onlyOneSelected);
+		add(editor.bind(mxResources.get("warning"), mxGraphActions.getWarningMessageChangeAction(),
+				"/com/mxgraph/examples/swing/images/rule.gif")).setEnabled(onlyOneSelected);
 		addSeparator();
 
 		add(editor.bind(mxResources.get("selectVertices"), mxGraphActions

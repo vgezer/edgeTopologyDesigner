@@ -209,7 +209,13 @@ public class GraphEditor extends BasicGraphEditor {
 		public String getToolTipForCell(Object cell) {
 			String tip = "<html>";
 			mxGeometry geo = getModel().getGeometry(cell);
-				tip += "serverid="+ getModel().getServerId(cell) + "<br>";
+			if(getModel().getServerId(cell) != null) {
+				tip += "<b>Server ID</b>: "+ getModel().getServerId(cell) + "<br>";	
+			}
+			if(getModel().getWarningMessage(cell) != null) {
+				tip += "<b>Note</b>: "+ getModel().getWarningMessage(cell) + "<br>";	
+			}
+				
 			mxCellState state = getView().getState(cell);
 
 			if (getModel().isEdge(cell)) {

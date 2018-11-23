@@ -1460,6 +1460,16 @@ public class mxGraphComponent extends JScrollPane implements Printable
 	{
 		return graph.setServerId(cell, value);
 	}
+	
+	public String getWarningMessageValue(Object cell, EventObject trigger)
+	{
+		return graph.getWarningMessage(cell);
+	}
+	
+	public Object setWarningMessageValue(Object cell, EventObject trigger, Object value)
+	{
+		return graph.setWarningMessage(cell, value);
+	}
 
 	/**
 	 * 
@@ -1471,6 +1481,7 @@ public class mxGraphComponent extends JScrollPane implements Printable
 	
 	public void stopServerIdChange(boolean cancel)
 	{
+		// TODO: Anything to do afterwards?
 	}
 
 	/**
@@ -1523,7 +1534,24 @@ public class mxGraphComponent extends JScrollPane implements Printable
 		return cell;
 	}
 	
-	
+	public Object warningMessageChanged(Object cell, Object value, EventObject evt)
+	{
+		mxIGraphModel model = graph.getModel();
+
+		model.beginUpdate();
+		try
+		{
+			graph.warningMessageChanged(cell, value);
+			eventSource.fireEvent(new mxEventObject(mxEvent.START_WARNINGMESSAGE_CHANGE,
+					"cell", cell, "value", value, "event", evt));
+		}
+		finally
+		{
+			model.endUpdate();
+		}
+
+		return cell;
+	}
 
 	/**
 	 * Returns the (unscaled) preferred size for the current page format (scaled
@@ -4630,6 +4658,25 @@ public class mxGraphComponent extends JScrollPane implements Printable
 			mouseClicked(e);
 		}
 
+	}
+
+	public void startWarningMessageChange(Object cell, EventObject evt) {
+		if (cell == null)
+		{
+			cell = graph.getSelectionCell();
+
+			if (cell != null && !graph.isCellEditable(cell))
+			{
+				cell = null;
+			}
+		}
+
+		if (cell != null)
+		{
+			eventSource.fireEvent(new mxEventObject(mxEvent.START_WARNINGMESSAGE_CHANGE,
+					"cell", cell, "event", evt));
+			cellEditor.startWarningMessageChange(cell, evt);
+		}
 	}
 
 }
