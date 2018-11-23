@@ -15,12 +15,14 @@ import java.util.Map;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -31,6 +33,7 @@ import com.mxgraph.analysis.mxTraversal;
 import com.mxgraph.analysis.mxGraphProperties;
 import com.mxgraph.analysis.mxGraphProperties.GraphType;
 import com.mxgraph.model.mxCell;
+import com.mxgraph.util.mxResources;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraph.mxICellVisitor;
 
@@ -166,39 +169,53 @@ public class GraphConfigDialog extends JDialog {
 
 	protected JTextField numEdgesField = new JTextField();
 
+	protected JRadioButton serverType = new JRadioButton(mxResources.get("serverId"));
+
+	protected JRadioButton nameType = new JRadioButton(mxResources.get("serverName"));
+
 	protected JTextField startVertexValueField = new JTextField();
 
 	protected JTextField endVertexValueField = new JTextField();
 
-	public GraphConfigDialog(final GraphType graphType2, String dialogText) {
 
+	public GraphConfigDialog(final GraphType graphType2, String dialogText) {
 		super((Frame) null, dialogText, true);
+
 		if (graphType2 == GraphType.DIJKSTRA) {
-			JPanel panel = new JPanel(new GridLayout(2, 2, 4, 4));
-			panel.add(new JLabel("Starting vertex"));
+			JPanel panel = new JPanel(new GridLayout(3, 3, 4, 4));
+			ButtonGroup group = new ButtonGroup();
+			group.add(serverType);
+			group.add(nameType);
+			serverType.setSelected(true);
+			panel.add(new JLabel(mxResources.get("type")));
+			panel.add(serverType);
+			panel.add(nameType);
+			panel.add(new JLabel(mxResources.get("startingNode")));
+			panel.add(new JLabel(":"));
 			panel.add(startVertexValueField);
-			panel.add(new JLabel("End vertex"));
+			panel.add(new JLabel(mxResources.get("finalNode")));
+			panel.add(new JLabel(":"));
 			panel.add(endVertexValueField);
 			JPanel panelBorder = new JPanel();
 			panelBorder.setBorder(new EmptyBorder(10, 10, 10, 10));
 			panelBorder.add(panel);
 
 			JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
 			panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY),
 					BorderFactory.createEmptyBorder(16, 8, 8, 8)));
 
-			JButton applyButton = new JButton("Start");
-			JButton closeButton = new JButton("Cancel");
+			JButton applyButton = new JButton(mxResources.get("calculate"));
+			JButton closeButton = new JButton(mxResources.get("cancel"));
 			buttonPanel.add(closeButton);
 			buttonPanel.add(applyButton);
 			getRootPane().setDefaultButton(applyButton);
-
 			applyButton.addActionListener(new ActionListener() {
 				double distance = 0;
 
 				public void actionPerformed(ActionEvent e) {
-					applyValues();
 
+					applyValues();
 					String startValue = startVertexValueField.getText();
 					String endValue = endVertexValueField.getText();
 
@@ -212,18 +229,26 @@ public class GraphConfigDialog extends JDialog {
 					for (int i = 0; i < vertex.length; i++) {
 
 						mxCell v = (mxCell) vertex[i];
-
-						if (v.getValue().equals(startValue)) {
+						Object typeValue = null;
+						if(nameType.isSelected()) {
+							typeValue = v.getValue(); 
+						}
+						else {
+							typeValue = v.getServerid();
+						}
+						if (typeValue.equals(startValue)) {
 							startVertex = (mxCell) vertex[i];
-						} else if (v.getValue().equals(endValue)) {
+						} else if (typeValue.equals(endValue)) {
 							endVertex = (mxCell) vertex[i];
 						}
 					}
 					
 					if (startVertex == null) {
-						JOptionPane.showMessageDialog(null, "The value of (starting vertex) you entered is not valid!", "Wrong value",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, mxResources.get("emptyValue", new String[] {mxResources.get("startingNode")}), 
+								mxResources.get("error"), JOptionPane.ERROR_MESSAGE);
 					} else if (endVertex == null) {
-						JOptionPane.showMessageDialog(null, "The value of (end vertex) you entered is not valid!", "Wrong value",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, mxResources.get("emptyValue", new String[] {mxResources.get("finalNode")}), 
+								mxResources.get("error"), JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						if (graphType2 == GraphType.DIJKSTRA) {
@@ -257,16 +282,15 @@ public class GraphConfigDialog extends JDialog {
 									}
 								});
 
-								message.concat("Total minimal distance is: " + distance);
-								JOptionPane.showMessageDialog(messageDialog,"Total minimal distance is: " + distance);  
+								message.concat(mxResources.get("totalDistance") + distance);
+								JOptionPane.showMessageDialog(messageDialog, mxResources.get("totalDistance") + distance);
+								setVisible(false);
 							} catch (StructuralException e1) {
 								System.out.println(e1);
 							}
 						}
 					}
 
-					
-					setVisible(false);
 				}
 			});
 			closeButton.addActionListener(new ActionListener() {

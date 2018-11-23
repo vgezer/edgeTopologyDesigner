@@ -135,7 +135,9 @@ public class EditorMenuBar extends JMenuBar {
 		menu.addSeparator();
 
 		menu.add(editor.bind(mxResources.get("warning"), new WarningAction()));
-		menu.add(editor.bind(mxResources.get("edit"), mxGraphActions.getEditAction()));
+		menu.add(editor.bind(mxResources.get("edit") + " - F2", mxGraphActions.getEditAction()));
+		menu.add(editor.bind(mxResources.get("setServerId") + " - F3", mxGraphActions.getServerIdChangeAction(), 
+				"/com/mxgraph/examples/swing/images/wrench.gif"));
 
 		// Creates the view menu
 		menu = add(new JMenu(mxResources.get("view")));
@@ -435,8 +437,8 @@ public class EditorMenuBar extends JMenuBar {
 		}
 
 		// Creates a developer menu
-		menu = add(new JMenu("Analyze"));
-		menu.add(editor.bind("Measure distance between Vertices", new InsertGraph(GraphType.DIJKSTRA, aGraph)));
+		menu = add(new JMenu(mxResources.get("analyze")));
+		menu.add(editor.bind(mxResources.get("measureText"), new InsertGraph(GraphType.DIJKSTRA, aGraph)));
 
 		// Creates the help menu
 		menu = add(new JMenu(mxResources.get("help")));
@@ -806,17 +808,20 @@ public class EditorMenuBar extends JMenuBar {
 				
 				// Check vertices-connections
 				aGraph.setGraph(graph);
-				if (!mxGraphStructure.isConnected(aGraph)) {
-					JOptionPane.showMessageDialog(null, "Some vertices are not connected", "Connection error!",JOptionPane.ERROR_MESSAGE);
-					//graph.getModel().beginUpdate();
-					//mxGraphStructure.makeConnected(aGraph);
-					//graph.getModel().endUpdate();
+				if(aGraph.getChildVertices(aGraph.getGraph().getDefaultParent()).length == 0) {
+					JOptionPane.showMessageDialog(null, mxResources.get("emptyGraph"), mxResources.get("error"), 
+							JOptionPane.ERROR_MESSAGE);
+				}
+				else if (!mxGraphStructure.isConnected(aGraph)) {
+					JOptionPane.showMessageDialog(null, mxResources.get("notConnected"), mxResources.get("error"), 
+							JOptionPane.ERROR_MESSAGE);
+				}
+				else if(aGraph.getChildVertices(aGraph.getGraph().getDefaultParent()).length < 2) {
+					JOptionPane.showMessageDialog(null, mxResources.get("atLeastTwo"), mxResources.get("error"), 
+							JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					String dialogText = "";
-					if (graphType == GraphType.DIJKSTRA)
-						dialogText = "Measure distance between Vertices";
-					GraphConfigDialog dialog = new GraphConfigDialog(graphType, dialogText);
+					GraphConfigDialog dialog = new GraphConfigDialog(graphType, mxResources.get("measureText"));
 					dialog.configureLayout(graph, graphType, aGraph);
 					dialog.setModal(true);
 					Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

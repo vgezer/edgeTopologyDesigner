@@ -2772,7 +2772,6 @@ public class mxGraph extends mxEventSource
 						}
 					}
 				}
-
 				fireEvent(new mxEventObject(mxEvent.CELLS_ADDED, "cells",
 						cells, "parent", parent, "index", index, "source",
 						source, "target", target, "absolute", absolute));
@@ -5306,6 +5305,18 @@ public class mxGraph extends mxEventSource
 
 		return (result != null) ? result.toString() : "";
 	}
+	
+	public String getServerId(Object cell)
+	{
+		Object result = model.getServerId(cell);
+
+		return (result != null) ? result.toString() : "";
+	}
+	
+	public Object setServerId(Object cell, Object value)
+	{
+		return model.setServerId(cell, value);
+	}
 
 	/**
 	 * Returns a string or DOM node that represents the label for the given
@@ -5354,6 +5365,19 @@ public class mxGraph extends mxEventSource
 			{
 				cellSizeUpdated(cell, false);
 			}
+		}
+		finally
+		{
+			model.endUpdate();
+		}
+	}
+	
+	public void serverIdChanged(Object cell, Object value)
+	{
+		model.beginUpdate();
+		try
+		{
+			getModel().setServerId(cell, value);
 		}
 		finally
 		{

@@ -174,6 +174,8 @@ public class mxEvent
 	 */
 	public static final String START_EDITING = "startEditing";
 
+
+	public static final String START_SERVERID_CHANGE = "startServerIdChange";
 	/**
 	 * 
 	 */

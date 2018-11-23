@@ -24,6 +24,7 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxPoint;
+import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxUndoableEdit;
 
 /**
@@ -111,10 +112,10 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 	 */
 	protected int nextId = 0;
 	
-	//TODO
 	/**
 	 * Specifies the next userId, coudId, edgeNodeId and raspberryPiId to be created. Initial value is 0.
 	 */
+	
 	protected int userId, coudId, edgeNodeId, raspberryPiId = 0;
 
 	/**
@@ -453,6 +454,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 		{
 			boolean parentChanged = parent != getParent(child);
 			execute(new mxChildChange(this, parent, child, index));
+			execute(new mxServerIdChange(this, child, index));
 
 			// Maintains the edges parents by moving the edges
 			// into the nearest common ancestor of its
@@ -768,6 +770,8 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 	 */
 	public void updateEdgeParent(Object edge, Object root)
 	{
+		String input;
+		String string = "";
 		Object source = getTerminal(edge, true);
 		Object target = getTerminal(edge, false);
 		Object cell = null;
@@ -788,11 +792,9 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 		
 		if (isAncestor(root, source) && isAncestor(root, target))
 		{
-			//TODO
-			String input;
-			String string = "";
             do {
-                input = JOptionPane.showInputDialog(null,"Enter the distance between " +((mxCell) source).getValue() +" and " + ((mxCell) target).getValue());
+                input = JOptionPane.showInputDialog(null, mxResources.get("enterDistance", 
+                		new String[] {((mxCell) source).getValue().toString(), ((mxCell) target).getValue().toString()}));
                 if (input == null) {
                 	this.cellRemoved(edge);
                 	break;
@@ -800,7 +802,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
                 else if (input.matches("[0-9]+(\\.){0,1}[0-9]*")) {
                     string = input;
                 } else {
-                	JOptionPane.showMessageDialog(null, "Only double values can be accepted!", "Wrong value",JOptionPane.ERROR_MESSAGE);
+                	JOptionPane.showMessageDialog(null, mxResources.get("onlyDouble"), mxResources.get("error"), JOptionPane.ERROR_MESSAGE);
                 }
             } while (!input.matches("[0-9]+(\\.){0,1}[0-9]*"));
             
@@ -845,7 +847,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 				remove(edge);
 			}
 		}
-		
+
 	}
 
 	/**
@@ -970,6 +972,18 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 	{
 		return (cell instanceof mxICell) ? ((mxICell) cell).getValue() : null;
 	}
+	
+	public Object getServerId(Object cell)
+	{
+		return (cell instanceof mxICell) ? ((mxICell) cell).getServerid() : null;
+	}
+
+	public Object setServerId(Object cell, Object value)
+	{
+		execute(new mxServerIdChange(this, cell, value));
+		return value;
+
+	}
 
 	/* (non-Javadoc)
 	 * @see com.mxgraph.model.mxIGraphModel#setValue(Object, Object)
@@ -990,6 +1004,15 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 	{
 		Object oldValue = ((mxICell) cell).getValue();
 		((mxICell) cell).setValue(value);
+
+		return oldValue;
+	}
+
+	
+	protected Object serverIdForCellChanged(Object cell, Object value)
+	{
+		Object oldValue = ((mxICell) cell).getServerid();
+		((mxICell) cell).setServerid(value);
 
 		return oldValue;
 	}
@@ -1787,6 +1810,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 			builder.append("<");
 			builder.append(cells.size());
 			builder.append(" entries>");
+			builder.append(cells);
 		}
 		else
 		{
@@ -2320,6 +2344,93 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 		{
 			value = previous;
 			previous = ((mxGraphModel) model).valueForCellChanged(cell,
+					previous);
+		}
+
+	}
+
+	public static class mxServerIdChange extends mxAtomicGraphModelChange
+	{
+
+		/**
+		 *
+		 */
+		protected Object cell, value, previous;
+
+		/**
+		 * 
+		 */
+		public mxServerIdChange()
+		{
+			this(null, null, null);
+		}
+
+		/**
+		 * 
+		 */
+		public mxServerIdChange(mxGraphModel model, Object cell, Object value)
+		{
+			super(model);
+			this.cell = cell;
+			this.value = value;
+			this.previous = this.value;
+		}
+
+		/**
+		 * 
+		 */
+		public void setCell(Object value)
+		{
+			cell = value;
+		}
+
+		/**
+		 * @return the cell
+		 */
+		public Object getCell()
+		{
+			return cell;
+		}
+
+		/**
+		 * 
+		 */
+		public void setValue(Object value)
+		{
+			this.value = value;
+		}
+
+		/**
+		 * @return the value
+		 */
+		public Object getValue()
+		{
+			return value;
+		}
+
+		/**
+		 * 
+		 */
+		public void setPrevious(Object value)
+		{
+			previous = value;
+		}
+
+		/**
+		 * @return the previous
+		 */
+		public Object getPrevious()
+		{
+			return previous;
+		}
+
+		/**
+		 * Changes the root of the model.
+		 */
+		public void execute()
+		{
+			value = previous;
+			previous = ((mxGraphModel) model).serverIdForCellChanged(cell,
 					previous);
 		}
 

@@ -231,6 +231,9 @@ public interface mxIGraphModel
 	 * @return Returns the new value.
 	 */
 	Object setValue(Object cell, Object value);
+	
+	Object setServerId(Object cell, Object value);
+	Object getServerId(Object cell);
 
 	/**
 	 * Returns the geometry of the given cell.

@@ -88,7 +88,7 @@ public class mxXmlUtils
 		{
 			log.log(Level.SEVERE, "Failed to parse XML", e);
 		}
-		
+
 		return null;
 	}
 

@@ -26,6 +26,8 @@ public class mxGraphActions
 	 * 
 	 */
 	static final Action editAction = new EditAction("edit");
+	
+	static final Action serverIdChangeAction = new ServerIdChangeAction("serverIdChange");
 
 	/**
 	 * 
@@ -156,6 +158,10 @@ public class mxGraphActions
 	public static Action getEditAction()
 	{
 		return editAction;
+	}
+	
+	public static Action getServerIdChangeAction() {
+		return serverIdChangeAction;
 	}
 
 	/**
@@ -401,6 +407,37 @@ public class mxGraphActions
 			if (e.getSource() instanceof mxGraphComponent)
 			{
 				((mxGraphComponent) e.getSource()).startEditing();
+			}
+		}
+
+	}
+	
+	
+	public static class ServerIdChangeAction extends AbstractAction
+	{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8729026218237907543L;
+
+		/**
+		 * 
+		 * @param name
+		 */
+		public ServerIdChangeAction(String name)
+		{
+			super(name);
+		}
+
+		/**
+		 * 
+		 */
+		public void actionPerformed(ActionEvent e)
+		{
+			if (e.getSource() instanceof mxGraphComponent)
+			{
+				((mxGraphComponent) e.getSource()).startServerIdChange(null, null);
 			}
 		}
 

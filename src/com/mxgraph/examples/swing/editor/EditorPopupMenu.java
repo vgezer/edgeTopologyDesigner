@@ -65,7 +65,10 @@ public class EditorPopupMenu extends JPopupMenu
 		add(
 				editor.bind(mxResources.get("edit"), mxGraphActions
 						.getEditAction())).setEnabled(selected);
-
+		add(
+				editor.bind(mxResources.get("setServerId"), mxGraphActions
+						.getServerIdChangeAction(),
+						"/com/mxgraph/examples/swing/images/wrench.gif")).setEnabled(selected);		
 		addSeparator();
 
 		add(editor.bind(mxResources.get("selectVertices"), mxGraphActions

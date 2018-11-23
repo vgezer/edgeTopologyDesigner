@@ -20,6 +20,11 @@ public interface mxICellEditor
 	 * Starts editing the given cell.
 	 */
 	public void startEditing(Object cell, EventObject trigger);
+	
+	
+	public void startServerIdChange(Object cell, EventObject trigger);
+	
+	public void stopServerIdChange(boolean cancel);
 
 	/**
 	 * Stops the current editing.

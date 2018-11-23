@@ -15,6 +15,7 @@ import com.mxgraph.model.mxGraphModel.mxCollapseChange;
 import com.mxgraph.model.mxGraphModel.mxGeometryChange;
 import com.mxgraph.model.mxGraphModel.mxStyleChange;
 import com.mxgraph.model.mxGraphModel.mxValueChange;
+import com.mxgraph.model.mxGraphModel.mxServerIdChange;
 import com.mxgraph.model.mxGraphModel.mxVisibleChange;
 
 /**
@@ -61,6 +62,7 @@ public class mxCodecRegistry
 		register(new mxChildChangeCodec());
 		register(new mxTerminalChangeCodec());
 		register(new mxGenericChangeCodec(new mxValueChange(), "value"));
+		register(new mxGenericChangeCodec(new mxServerIdChange(), "serverid"));
 		register(new mxGenericChangeCodec(new mxStyleChange(), "style"));
 		register(new mxGenericChangeCodec(new mxGeometryChange(), "geometry"));
 		register(new mxGenericChangeCodec(new mxCollapseChange(), "collapsed"));

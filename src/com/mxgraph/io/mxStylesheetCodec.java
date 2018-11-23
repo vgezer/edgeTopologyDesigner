@@ -66,7 +66,6 @@ public class mxStylesheetCodec extends mxObjectCodec
 				Element styleNode = enc.document.createElement("add");
 				String stylename = entry.getKey();
 				styleNode.setAttribute("as", stylename);
-
 				Map<String, Object> style = entry.getValue();
 				Iterator<Map.Entry<String, Object>> it2 = style.entrySet()
 						.iterator();

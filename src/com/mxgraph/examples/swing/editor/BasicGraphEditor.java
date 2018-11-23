@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -628,13 +629,14 @@ public class BasicGraphEditor extends JPanel
 	 */
 	public Action bind(String name, final Action action)
 	{
-		return bind(name, action, null);
+		return bind(name, action, new String());
 	}
 
 	/**
 	 * 
 	 * @param name
 	 * @param action
+	 * @param icon
 	 * @return a new Action bound to the specified string name and icon
 	 */
 	@SuppressWarnings("serial")
@@ -642,6 +644,30 @@ public class BasicGraphEditor extends JPanel
 	{
 		AbstractAction newAction = new AbstractAction(name, (iconUrl != null) ? new ImageIcon(
 				BasicGraphEditor.class.getResource(iconUrl)) : null)
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				action.actionPerformed(new ActionEvent(getGraphComponent(), e
+						.getID(), e.getActionCommand()));
+			}
+		};
+		
+		newAction.putValue(Action.SHORT_DESCRIPTION, action.getValue(Action.SHORT_DESCRIPTION));
+		
+		return newAction;
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @param action
+	 * @param icon
+	 * @return a new Action bound to the specified string name and icon
+	 */
+	@SuppressWarnings("serial")
+	public Action bind(String name, final Action action, Icon icon)
+	{
+		AbstractAction newAction = new AbstractAction(name, (icon != null) ? icon : null)
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -712,11 +738,19 @@ public class BasicGraphEditor extends JPanel
 	 */
 	public void exit()
 	{
+
 		JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
 
 		if (frame != null)
 		{
-			frame.dispose();
+			int confirmed = JOptionPane.showConfirmDialog(null, 
+					mxResources.get("exitText"), mxResources.get("exit") + "?",
+			        JOptionPane.YES_NO_OPTION);
+
+			    if (confirmed == JOptionPane.YES_OPTION) {
+			    	frame.dispose();
+			    }
+
 		}
 	}
 

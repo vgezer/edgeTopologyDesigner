@@ -749,7 +749,6 @@ public class EditorActions
 						mxCodec codec = new mxCodec();
 						String xml = mxXmlUtils.getXml(codec.encode(graph
 								.getModel()));
-
 						mxUtils.writeFile(xml, filename);
 
 						editor.setModified(false);
@@ -1618,7 +1617,6 @@ public class EditorActions
 							.getGraphComponent().getGraph().getModel());
 					editor.setCurrentFile(file);
 					resetEditor(editor);
-
 					return;
 				}
 			}
@@ -1746,7 +1744,6 @@ public class EditorActions
 											graph.getModel());
 									editor.setCurrentFile(fc
 											.getSelectedFile());
-
 									resetEditor(editor);
 								}
 							}

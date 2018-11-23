@@ -51,6 +51,11 @@ public class mxCell implements mxICell, Cloneable, Serializable
 	 * Holds the user object. Default is null.
 	 */
 	protected Object value;
+	
+	/**
+	 * Holds the server id. Default is null.
+	 */
+	protected Object serverid;
 
 	/**
 	 * Holds the geometry. Default is null.
@@ -136,6 +141,22 @@ public class mxCell implements mxICell, Cloneable, Serializable
 	public Object getValue()
 	{
 		return value;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.mxgraph.model.mxICell#getServerid()
+	 */
+	public Object getServerid()
+	{
+		return serverid;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.mxgraph.model.mxICell#setServerid()
+	 */
+	public void setServerid(Object value)
+	{
+		this.serverid = value;
 	}
 
 	/* (non-Javadoc)
@@ -631,6 +652,8 @@ public class mxCell implements mxICell, Cloneable, Serializable
 		builder.append(id);
 		builder.append(", value=");
 		builder.append(value);
+		builder.append(", serverid=");
+		builder.append(serverid);
 		builder.append(", geometry=");
 		builder.append(geometry);
 		builder.append("]");

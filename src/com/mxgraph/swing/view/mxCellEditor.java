@@ -16,6 +16,7 @@ import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.InputMap;
 import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -99,6 +100,11 @@ public class mxCellEditor implements mxICellEditor
 	 * 
 	 */
 	protected transient Object editingCell;
+
+	/**
+	 * 
+	 */
+	protected transient Object editingServerId;
 
 	/**
 	 * 
@@ -427,7 +433,6 @@ public class mxCellEditor implements mxICellEditor
 					.getGraph().getView().getScale());
 			scrollPane.setBounds(getEditorBounds(state, scale));
 			scrollPane.setVisible(true);
-
 			String value = getInitialValue(state, evt);
 			JTextComponent currentEditor = null;
 
@@ -480,6 +485,31 @@ public class mxCellEditor implements mxICellEditor
 		}
 	}
 
+	public void startServerIdChange(Object cell, EventObject evt)
+	{
+		if (editingServerId != null)
+		{
+			stopServerIdChange(true);
+		}
+		
+		mxCellState state = graphComponent.getGraph().getView().getState(cell);
+		graphComponent.getEditingValue(state.getCell(), trigger);
+		
+		editingServerId = cell;
+		trigger = evt;
+
+		String value = getServerIdValue(state, evt);
+		String input = (String) JOptionPane.showInputDialog(null, "Enter the Server ID: ", "Set property", JOptionPane.OK_CANCEL_OPTION, null,
+		        null, value);
+		
+        if (input == null) {
+        	setServerIdValue(state, evt, value);
+        }
+        else {
+        	setServerIdValue(state, evt, input);	
+        }
+	}
+
 	/**
 	 * 
 	 */
@@ -491,7 +521,7 @@ public class mxCellEditor implements mxICellEditor
 	/*
 	 * (non-Javadoc)
 	 * @see com.mxgraph.swing.view.mxICellEditor#stopEditing(boolean)
-	 */
+	 */ 
 	public void stopEditing(boolean cancel)
 	{
 		if (editingCell != null)
@@ -522,6 +552,24 @@ public class mxCellEditor implements mxICellEditor
 			graphComponent.requestFocusInWindow();
 		}
 	}
+	 
+	 public void stopServerIdChange(boolean cancel)
+		{
+			if (editingServerId != null)
+			{
+				//scrollPane.transferFocusUpCycle();
+				Object cell = editingServerId;
+				editingServerId = null;
+
+				if (!cancel)
+				{
+					EventObject trig = trigger;
+					trigger = null;
+					graphComponent.serverIdChanged(cell, getServerIdValue(null, trig), trig);
+				}
+				
+			}
+		}
 
 	/**
 	 * Gets the initial editing value for the given cell.
@@ -531,6 +579,14 @@ public class mxCellEditor implements mxICellEditor
 		return graphComponent.getEditingValue(state.getCell(), trigger);
 	}
 
+	protected String getServerIdValue(mxCellState state, EventObject trigger)
+	{
+		return graphComponent.getServerIdValue(state.getCell(), trigger);
+	}
+	protected void setServerIdValue(mxCellState state, EventObject trigger, Object value)
+	{
+		graphComponent.setServerIdValue(state.getCell(), trigger, value);
+	}
 	/**
 	 * Returns the current editing value.
 	 */

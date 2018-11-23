@@ -372,6 +372,7 @@ public class mxCodec
 
 		if (includeChildren)
 		{
+
 			int childCount = cell.getChildCount();
 
 			for (int i = 0; i < childCount; i++)

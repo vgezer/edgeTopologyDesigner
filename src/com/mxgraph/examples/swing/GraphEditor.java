@@ -9,6 +9,8 @@ import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import org.w3c.dom.Document;
@@ -56,7 +58,7 @@ public class GraphEditor extends BasicGraphEditor {
 	// GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/connector.gif");
 
 	public GraphEditor() {
-		this("mxGraph Editor", new CustomGraphComponent(new CustomGraph()));
+		this("Edge Topology Editor", new CustomGraphComponent(new CustomGraph()));
 	}
 
 	/**
@@ -207,6 +209,7 @@ public class GraphEditor extends BasicGraphEditor {
 		public String getToolTipForCell(Object cell) {
 			String tip = "<html>";
 			mxGeometry geo = getModel().getGeometry(cell);
+				tip += "serverid="+ getModel().getServerId(cell) + "<br>";
 			mxCellState state = getView().getState(cell);
 
 			if (getModel().isEdge(cell)) {
@@ -312,6 +315,20 @@ public class GraphEditor extends BasicGraphEditor {
 		mxConstants.W3C_SHADOWCOLOR = "#D3D3D3";
 
 		GraphEditor editor = new GraphEditor();
-		editor.createFrame(new EditorMenuBar(editor)).setVisible(true);
+
+		JFrame frame = editor.createFrame(new EditorMenuBar(editor));
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        if (JOptionPane.showConfirmDialog(frame, 
+		            mxResources.get("exitText"), mxResources.get("exit") + "?", 
+		            JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+		            System.exit(0);
+		        }
+		    }
+		});
 	}
 }

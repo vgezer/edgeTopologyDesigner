@@ -83,7 +83,6 @@ public class EditorToolBar extends JToolBar
 
 		add(editor.bind("Delete", mxGraphActions.getDeleteAction(),
 				"/com/mxgraph/examples/swing/images/delete.gif"));
-
 		addSeparator();
 
 		add(editor.bind("Undo", new HistoryAction(true),
@@ -192,6 +191,11 @@ public class EditorToolBar extends JToolBar
 		zoomCombo.setMaximumSize(new Dimension(75, 100));
 		zoomCombo.setMaximumRowCount(9);
 		add(zoomCombo);
+		
+		addSeparator();
+		
+		add(editor.bind("setServerId", mxGraphActions.getServerIdChangeAction(),
+				"/com/mxgraph/examples/swing/images/wrench.gif"));
 
 		// Sets the zoom in the zoom combo the current value
 		mxIEventListener scaleTracker = new mxIEventListener()

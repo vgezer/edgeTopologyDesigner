@@ -9,8 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-
 import com.mxgraph.costfunction.mxCostFunction;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
@@ -42,12 +40,6 @@ public class mxGraphStructure
 	{
 		Object[] vertices = aGraph.getChildVertices(aGraph.getGraph().getDefaultParent());
 		int vertexNum = vertices.length;
-
-		if (vertexNum == 0)
-		{
-			JOptionPane.showMessageDialog(null, "The graph component is empty", "Error!",JOptionPane.ERROR_MESSAGE);
-			return false;			
-		}
 
 		//data preparation
 		int connectedVertices = 1;

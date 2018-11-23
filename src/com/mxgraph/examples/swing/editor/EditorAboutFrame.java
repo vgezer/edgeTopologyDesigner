@@ -91,15 +91,15 @@ public class EditorAboutFrame extends JDialog
 		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 		content.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
-		content.add(new JLabel("JGraph X - The Swing Portion of mxGraph"));
+		content.add(new JLabel("Edge Topology Manager"));
 		content.add(new JLabel(" "));
 
-		content.add(new JLabel("mxGraph Version " + mxGraph.VERSION));
+		content.add(new JLabel("powered by mxGraph " + mxGraph.VERSION));
 		content.add(new JLabel("Copyright (C) 2009 by JGraph Ltd."));
 		content.add(new JLabel("All rights reserved."));
 		content.add(new JLabel(" "));
 		
-		content.add(new JLabel("Modified from Oussama Barbana"));
+		content.add(new JLabel("Topology Manager Additions by:"));
 		content.add(new JLabel("DFKI GmbH"));
 		content.add(new JLabel("Trippstadter Strasse 122"));
 		content.add(new JLabel("D-67663 Kaiserslautern"));

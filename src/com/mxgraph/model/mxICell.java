@@ -270,4 +270,17 @@ public interface mxICell
 	 */
 	Object clone() throws CloneNotSupportedException;
 
+	/**
+	 * Returns the server id of this cell.
+	 *
+	 * @return Returns the server id of this cell.
+	 */
+	Object getServerid();
+
+	/**
+	 * Sets the server id of this cell.
+	 *
+	 */
+	void setServerid(Object value);
+
 }

@@ -344,6 +344,13 @@ public class mxObjectCodec
 		encodeElements(enc, obj, node);
 	}
 
+	protected void encodeServerId(mxCodec enc, Object obj, Node node, String value)
+	{
+		mxCodec.setAttribute(node, "serverid", value);
+		encodeFields(enc, obj, node);
+		encodeElements(enc, obj, node);
+	}
+
 	/**
 	 * Encodes the declared fields of the given object into the given node.
 	 * 
@@ -509,7 +516,6 @@ public class mxObjectCodec
 			{
 				mxCodec.setAttribute(child, "as", attr);
 			}
-
 			mxCodec.setAttribute(child, "value", value);
 			node.appendChild(child);
 		}
@@ -517,6 +523,7 @@ public class mxObjectCodec
 		{
 			mxCodec.setAttribute(node, attr, value);
 		}
+		
 	}
 
 	/**
@@ -662,7 +669,6 @@ public class mxObjectCodec
 		{
 			fields = new HashMap<Class, Map<String, Field>>();
 		}
-
 		// Creates the fields cache entry for the given type
 		Map<String, Field> map = fields.get(type);
 
@@ -685,7 +691,6 @@ public class mxObjectCodec
 			try
 			{
 				field = type.getDeclaredField(fieldname);
-
 				if (field != null)
 				{
 					// Adds field to fields cache
@@ -903,6 +908,7 @@ public class mxObjectCodec
 		}
 		catch (IllegalAccessException e1)
 		{
+			System.out.println("Exception here!!!");
 			setFieldValueWithAccessor(obj, field, value);
 		}
 		catch (Exception e)
@@ -922,7 +928,6 @@ public class mxObjectCodec
 			try
 			{
 				Method method = getAccessor(obj, field, false);
-
 				if (method != null)
 				{
 					Class<?> type = method.getParameterTypes()[0];
@@ -1083,6 +1088,7 @@ public class mxObjectCodec
 		{
 			for (int i = 0; i < attrs.getLength(); i++)
 			{
+				
 				Node attr = attrs.item(i);
 				decodeAttribute(dec, attr, obj);
 			}
@@ -1098,6 +1104,7 @@ public class mxObjectCodec
 
 		if (!name.equalsIgnoreCase("as") && !name.equalsIgnoreCase("id"))
 		{
+			
 			Object value = attr.getNodeValue();
 			String fieldname = getFieldName(name);
 
