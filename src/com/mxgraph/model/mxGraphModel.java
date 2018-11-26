@@ -526,8 +526,10 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 					        default: 
 				        }
 						if(serverAdded) {
-							execute(new mxServerIdChange(this, mxc, (nextId-1)));
-							setWarningMessage(mxc, mxResources.get("usingDefault") + ": " + (nextId-1));
+							if(mxc.getServerid() == null) {
+								execute(new mxServerIdChange(this, mxc, (nextId-3)));
+								setWarningMessage(mxc, mxResources.get("usingDefault") + ": " + (nextId-3));
+							}
 						}
 					}
 

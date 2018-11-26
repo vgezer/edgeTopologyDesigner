@@ -234,7 +234,7 @@ public class GraphConfigDialog extends JDialog {
 							typeValue = v.getValue(); 
 						}
 						else {
-							typeValue = v.getServerid();
+							typeValue = v.getServerid().toString();
 						}
 						if (typeValue.equals(startValue)) {
 							startVertex = (mxCell) vertex[i];
@@ -283,7 +283,7 @@ public class GraphConfigDialog extends JDialog {
 								});
 
 								message.concat(mxResources.get("totalDistance") + distance);
-								JOptionPane.showMessageDialog(messageDialog, mxResources.get("totalDistance") + distance);
+								JOptionPane.showMessageDialog(messageDialog, mxResources.get("totalDistance") + " " +distance);
 								setVisible(false);
 							} catch (StructuralException e1) {
 								System.out.println(e1);
