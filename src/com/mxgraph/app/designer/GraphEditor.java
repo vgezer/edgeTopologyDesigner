@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2006-2012, JGraph Ltd */
-package com.mxgraph.examples.swing;
+package com.mxgraph.app.designer;
 
 import java.awt.Color;
 import java.awt.Point;
