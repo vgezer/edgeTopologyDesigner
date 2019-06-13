@@ -1846,7 +1846,7 @@ public class mxUtils
 
 			for (int i = 0; i < digest.length; i++)
 			{
-				f.format("%02x", new Object[] { new Byte(digest[i]) });
+				f.format("%02x", new Object[] { digest[i] });
 			}
 			
 			f.close();

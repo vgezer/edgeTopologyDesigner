@@ -177,7 +177,7 @@ public class mxCodecRegistry
 			{
 				try
 				{
-					return clazz.newInstance();
+					return clazz.getConstructor().newInstance();
 				}
 				catch (Exception e)
 				{

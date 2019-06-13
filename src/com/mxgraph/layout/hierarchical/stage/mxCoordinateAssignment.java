@@ -231,7 +231,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 			msg.append(j);
 			msg.append(" : ");
 			mxGraphHierarchyRank rank = model.ranks
-					.get(new Integer(j));
+					.get(j);
 			Iterator<mxGraphAbstractHierarchyCell> iter = rank
 					.iterator();
 
@@ -283,7 +283,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 					for (int j = 0; j < model.ranks.size(); j++)
 					{
 						mxGraphHierarchyRank rank = model.ranks
-								.get(new Integer(j));
+								.get(j);
 						Iterator<mxGraphAbstractHierarchyCell> iter = rank
 								.iterator();
 
@@ -302,7 +302,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 					for (int j = 0; j < model.ranks.size(); j++)
 					{
 						mxGraphHierarchyRank rank = model.ranks
-								.get(new Integer(j));
+								.get(j);
 						Iterator<mxGraphAbstractHierarchyCell> iter = rank
 								.iterator();
 
@@ -341,7 +341,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 
 		for (int i = 0; i <= model.maxRank; i++)
 		{
-			mxGraphHierarchyRank rankSet = model.ranks.get(new Integer(i));
+			mxGraphHierarchyRank rankSet = model.ranks.get(i);
 			rank[i] = rankSet.toArray(new mxGraphAbstractHierarchyCell[rankSet
 					.size()]);
 
@@ -549,7 +549,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 	protected void rankMedianPosition(int rankValue,
 			mxGraphHierarchyModel model, int nextRankValue)
 	{
-		mxGraphHierarchyRank rankSet = model.ranks.get(new Integer(rankValue));
+		mxGraphHierarchyRank rankSet = model.ranks.get(rankValue);
 		Object[] rank = rankSet.toArray();
 		// Form an array of the order in which the cells are to be processed
 		// , the order is given by the weighted sum of the in or out edges,
@@ -839,7 +839,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 	protected void rankCoordinates(int rankValue, mxGraph graph,
 			mxGraphHierarchyModel model)
 	{
-		mxGraphHierarchyRank rank = model.ranks.get(new Integer(rankValue));
+		mxGraphHierarchyRank rank = model.ranks.get(rankValue);
 		double maxY = 0.0;
 		double localX = initialX + (widestRankValue - rankWidths[rankValue])
 				/ 2;
@@ -934,7 +934,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 		{
 			// Keep track of the widest cell on this rank
 			double maxCellHeight = 0.0;
-			mxGraphHierarchyRank rank = model.ranks.get(new Integer(rankValue));
+			mxGraphHierarchyRank rank = model.ranks.get(rankValue);
 			double localX = initialX;
 
 			// Store whether or not any of the cells' bounds were unavailable so
@@ -1188,7 +1188,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 	protected boolean repositionValid(mxGraphHierarchyModel model,
 			mxGraphAbstractHierarchyCell cell, int rank, double position)
 	{
-		mxGraphHierarchyRank rankSet = model.ranks.get(new Integer(rank));
+		mxGraphHierarchyRank rankSet = model.ranks.get(rank);
 		mxGraphAbstractHierarchyCell[] rankArray = rankSet
 				.toArray(new mxGraphAbstractHierarchyCell[rankSet.size()]);
 		int rankIndex = -1;
@@ -1356,7 +1356,7 @@ public class mxCoordinateAssignment implements mxHierarchicalLayoutStage
 		// both directions.
 		for (int i = 0; i < model.ranks.size(); i++)
 		{
-			mxGraphHierarchyRank rank = model.ranks.get(new Integer(i));
+			mxGraphHierarchyRank rank = model.ranks.get(i);
 
 			// Iterate over the top rank and fill in the connection information
 			Iterator<mxGraphAbstractHierarchyCell> iter = rank.iterator();

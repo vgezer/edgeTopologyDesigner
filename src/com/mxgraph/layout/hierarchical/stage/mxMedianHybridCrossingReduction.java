@@ -77,7 +77,7 @@ public class mxMedianHybridCrossingReduction implements
 
 		for (int i = 0; i < nestedBestRanks.length; i++)
 		{
-			mxGraphHierarchyRank rank = model.ranks.get(new Integer(i));
+			mxGraphHierarchyRank rank = model.ranks.get(i);
 			nestedBestRanks[i] = new mxGraphAbstractHierarchyCell[rank.size()];
 			rank.toArray(nestedBestRanks[i]);
 		}
@@ -100,7 +100,7 @@ public class mxMedianHybridCrossingReduction implements
 				// Store the current rankings as the best ones
 				for (int j = 0; j < nestedBestRanks.length; j++)
 				{
-					mxGraphHierarchyRank rank = model.ranks.get(new Integer(j));
+					mxGraphHierarchyRank rank = model.ranks.get(j);
 					Iterator<mxGraphAbstractHierarchyCell> iter = rank
 							.iterator();
 
@@ -121,7 +121,7 @@ public class mxMedianHybridCrossingReduction implements
 				// Restore the best values to the cells
 				for (int j = 0; j < nestedBestRanks.length; j++)
 				{
-					mxGraphHierarchyRank rank = model.ranks.get(new Integer(j));
+					mxGraphHierarchyRank rank = model.ranks.get(j);
 					Iterator<mxGraphAbstractHierarchyCell> iter = rank
 							.iterator();
 
@@ -149,7 +149,7 @@ public class mxMedianHybridCrossingReduction implements
 		for (int i = 0; i < model.maxRank + 1; i++)
 		{
 			rankList[i] = new mxGraphHierarchyRank();
-			ranks.put(new Integer(i), rankList[i]);
+			ranks.put(i, rankList[i]);
 		}
 
 		for (int i = 0; i < nestedBestRanks.length; i++)
@@ -199,8 +199,8 @@ public class mxMedianHybridCrossingReduction implements
 	protected int calculateRankCrossing(int i, mxGraphHierarchyModel model)
 	{
 		int totalCrossings = 0;
-		mxGraphHierarchyRank rank = model.ranks.get(new Integer(i));
-		mxGraphHierarchyRank previousRank = model.ranks.get(new Integer(i - 1));
+		mxGraphHierarchyRank rank = model.ranks.get(i);
+		mxGraphHierarchyRank previousRank = model.ranks.get(i - 1);
 
 		// Create an array of connections between these two levels
 		int currentRankSize = rank.size();
@@ -295,7 +295,7 @@ public class mxMedianHybridCrossingReduction implements
 
 			for (int i = 0; i < model.ranks.size(); i++)
 			{
-				mxGraphHierarchyRank rank = model.ranks.get(new Integer(i));
+				mxGraphHierarchyRank rank = model.ranks.get(i);
 				mxGraphAbstractHierarchyCell[] orderedCells = new mxGraphAbstractHierarchyCell[rank
 						.size()];
 				Iterator<mxGraphAbstractHierarchyCell> iter = rank.iterator();

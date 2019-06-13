@@ -159,8 +159,7 @@ public class PathParser extends NumberParser
 		skipSpaces();
 		if (current != -1)
 		{
-			reportError("end.of.stream.expected", new Object[] { new Integer(
-					current) });
+			reportError("end.of.stream.expected", new Object[] { current });
 		}
 
 		pathHandler.endPath();

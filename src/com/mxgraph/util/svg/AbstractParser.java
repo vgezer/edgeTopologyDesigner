@@ -120,7 +120,7 @@ public abstract class AbstractParser implements Parser
 			int currentChar)
 	{
 		reportError("character.expected", new Object[] {
-				new Character(expectedChar), new Integer(currentChar) });
+				Character.toChars(expectedChar), currentChar });
 
 	}
 
@@ -132,8 +132,7 @@ public abstract class AbstractParser implements Parser
 	 */
 	protected void reportUnexpectedCharacterError(int currentChar)
 	{
-		reportError("character.unexpected", new Object[] { new Integer(
-				currentChar) });
+		reportError("character.unexpected", new Object[] { currentChar });
 
 	}
 

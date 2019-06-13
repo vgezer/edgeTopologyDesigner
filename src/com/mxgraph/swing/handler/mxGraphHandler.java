@@ -1032,7 +1032,7 @@ public class mxGraphHandler extends mxMouseAdapter implements
 				}
 
 				e = new MouseEvent(e.getComponent(), e.getID(), e.getWhen(),
-						e.getModifiers(), x, y, e.getClickCount(),
+						e.getModifiersEx(), x, y, e.getClickCount(),
 						e.isPopupTrigger(), e.getButton());
 			}
 
@@ -1497,7 +1497,7 @@ public class mxGraphHandler extends mxMouseAdapter implements
 		// new AWTEventListener() {...}, AWTEvent.KEY_EVENT_MASK). Problem
 		// is the event does not contain the modifier keys and the global
 		// handler is not called during drag and drop.
-		int mod = (action == TransferHandler.COPY) ? InputEvent.CTRL_MASK : 0;
+		int mod = (action == TransferHandler.COPY) ? InputEvent.CTRL_DOWN_MASK : 0;
 
 		return new MouseEvent(component, 0, System.currentTimeMillis(), mod,
 				location.x, location.y, 1, false, MouseEvent.BUTTON1);

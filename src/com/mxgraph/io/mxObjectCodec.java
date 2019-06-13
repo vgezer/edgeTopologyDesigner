@@ -192,48 +192,41 @@ public class mxObjectCodec
 	{
 		Object obj = null;
 
-		try
+		if (template.getClass().isEnum())
 		{
-			if (template.getClass().isEnum())
-			{
-				obj = template.getClass().getEnumConstants()[0];
-			}
-			else
-			{
-				obj = template.getClass().newInstance();
-			}
-
-			// Special case: Check if the collection
-			// should be a map. This is if the first
-			// child has an "as"-attribute. This
-			// assumes that all childs will have
-			// as attributes in this case. This is
-			// required because in JavaScript, the
-			// map and array object are the same.
-			if (obj instanceof Collection)
-			{
-				node = node.getFirstChild();
-
-				// Skips text nodes
-				while (node != null && !(node instanceof Element))
-				{
-					node = node.getNextSibling();
-				}
-
-				if (node != null && node instanceof Element
-						&& ((Element) node).hasAttribute("as"))
-				{
-					obj = new Hashtable<Object, Object>();
-				}
+			obj = template.getClass().getEnumConstants()[0];
+		}
+		else
+		{
+			try {
+				obj = template.getClass().getConstructor().newInstance();
+			} catch (Exception e) {
+				log.log(Level.SEVERE, "Failed to clone the template", e);
 			}
 		}
-		catch (InstantiationException e)
+
+		// Special case: Check if the collection
+		// should be a map. This is if the first
+		// child has an "as"-attribute. This
+		// assumes that all childs will have
+		// as attributes in this case. This is
+		// required because in JavaScript, the
+		// map and array object are the same.
+		if (obj instanceof Collection)
 		{
-			log.log(Level.SEVERE, "Failed to clone the template", e);
-		}
-		catch (IllegalAccessException e)
-		{
-			log.log(Level.SEVERE, "Failed to clone the template", e);
+			node = node.getFirstChild();
+
+			// Skips text nodes
+			while (node != null && !(node instanceof Element))
+			{
+				node = node.getNextSibling();
+			}
+
+			if (node != null && node instanceof Element
+					&& ((Element) node).hasAttribute("as"))
+			{
+				obj = new Hashtable<Object, Object>();
+			}
 		}
 
 		return obj;

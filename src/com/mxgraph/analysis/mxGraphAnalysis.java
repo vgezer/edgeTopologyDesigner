@@ -405,8 +405,8 @@ public class mxGraphAnalysis
 			 */
 			public int compare(mxCellState o1, mxCellState o2)
 			{
-				Double d1 = new Double(cf.getCost(o1));
-				Double d2 = new Double(cf.getCost(o2));
+				Double d1 = cf.getCost(o1);
+				Double d2 = cf.getCost(o2);
 
 				return d1.compareTo(d2);
 			}
