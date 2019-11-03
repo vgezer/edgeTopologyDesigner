@@ -3,7 +3,7 @@
 Allows creation of topologies for RTEF. The created ETD file is compatible with RTEF.
 
 <p align="center">
-  <img src="/doc/images/topologyDesigner.png" width="55%">
+  <img src="/docs/images/topologyDesigner.png" width="55%">
 </p>
 
 ## Features:
