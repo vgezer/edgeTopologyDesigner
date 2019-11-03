@@ -263,8 +263,6 @@ public class GraphConfigDialog extends JDialog {
 									public boolean visit(Object vertex, Object edge) {
 										mxCell v = (mxCell) vertex;
 										mxCell e = (mxCell) edge;
-										System.out.println(v.getValue());
-										System.out.println(e.getValue());
 										String eVal = "N/A";
 
 										if (e != null) {

@@ -135,7 +135,7 @@ public class EditorMenuBar extends JMenuBar {
 
 		menu.add(editor.bind(mxResources.get("edit") + " - [F2]", mxGraphActions.getEditAction()));
 		menu.add(editor.bind(mxResources.get("setServerId") + " - [F3]", mxGraphActions.getServerIdChangeAction(), 
-				"/com/mxgraph/examples/swing/images/wrench.gif"));
+				"/com/mxgraph/examples/swing/images/wrench.png"));
 		menu.add(editor.bind(mxResources.get("warning") + " - [F4]", mxGraphActions.getWarningMessageChangeAction(), 
 				"/com/mxgraph/examples/swing/images/rule.gif"));
 		// Creates the view menu

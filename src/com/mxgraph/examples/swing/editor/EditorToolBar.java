@@ -195,7 +195,7 @@ public class EditorToolBar extends JToolBar
 		addSeparator();
 
 		add(editor.bind("setServerId", mxGraphActions.getServerIdChangeAction(),
-				"/com/mxgraph/examples/swing/images/wrench.gif"));
+				"/com/mxgraph/examples/swing/images/wrench.png"));
 		add(editor.bind("setWarningMessage", mxGraphActions.getWarningMessageChangeAction(),
 				"/com/mxgraph/examples/swing/images/rule.gif"));
 
