@@ -1,8 +1,8 @@
-# Edge Topology Designer #
+# Edge Topology Designer
 
 Allows creation of topologies for RTEF. The created ETD file is compatible with RTEF.
 
-Features:
+## Features:
 
  - Automatically assign unique ID for each node.
  - Drag and Drop nodes to create links between them.
@@ -10,3 +10,11 @@ Features:
  - Add nodes, or free-text to visualise in the editor.
  - Save as PNG.
  - Print the topology.
+
+## Execution
+
+main method is in:
+
+    com/mxgraph/app/designer/TopologyDesigner.java
+
+
