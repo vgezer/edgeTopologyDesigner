@@ -597,8 +597,8 @@ public class EditorActions
 				mxGraphComponent graphComponent = editor.getGraphComponent();
 				mxGraph graph = graphComponent.getGraph();
 				FileFilter selectedFilter = null;
-				DefaultFileFilter mxeFile = new DefaultFileFilter(".mxe",
-						"Edge Topology " + mxResources.get("file") + " (.mxe)");
+				DefaultFileFilter mxeFile = new DefaultFileFilter(".etd",
+						"Edge Topology " + mxResources.get("file") + " (.etd)");
 				FileFilter vmlFileFilter = new DefaultFileFilter(".html",
 						"VML " + mxResources.get("file") + " (.html)");
 				String filename = null;
@@ -742,7 +742,7 @@ public class EditorActions
 								.createHtmlDocument(graph, null, 1, null, null)
 								.getDocumentElement()), filename);
 					}
-					else if (ext.equalsIgnoreCase("mxe")
+					else if (ext.equalsIgnoreCase("etd")
 							|| ext.equalsIgnoreCase("xml"))
 					{
 						mxCodec codec = new mxCodec();
@@ -1597,9 +1597,9 @@ public class EditorActions
 		{
 			mxGraph graph = editor.getGraphComponent().getGraph();
 
-			// Replaces file extension with .mxe
+			// Replaces file extension with .etd
 			String filename = file.getName();
-			filename = filename.substring(0, filename.length() - 4) + ".mxe";
+			filename = filename.substring(0, filename.length() - 4) + ".etd";
 
 			if (new File(filename).exists()
 					&& JOptionPane.showConfirmDialog(editor,
@@ -1638,8 +1638,8 @@ public class EditorActions
 
 						// Adds file filter for supported file format
 						DefaultFileFilter defaultFilter = new DefaultFileFilter(
-								".mxe", mxResources.get("allSupportedFormats")
-										+ " (.mxe, .png, .vdx)")
+								".etd", mxResources.get("allSupportedFormats")
+										+ " (.etd, .png, .vdx)")
 						{
 
 							public boolean accept(File file)
@@ -1653,9 +1653,9 @@ public class EditorActions
 						};
 						fc.addChoosableFileFilter(defaultFilter);
 
-						fc.addChoosableFileFilter(new DefaultFileFilter(".mxe",
+						fc.addChoosableFileFilter(new DefaultFileFilter(".etd",
 								"mxGraph Editor " + mxResources.get("file")
-										+ " (.mxe)"));
+										+ " (.etd)"));
 						fc.addChoosableFileFilter(new DefaultFileFilter(".png",
 								"PNG+XML  " + mxResources.get("file")
 										+ " (.png)"));
