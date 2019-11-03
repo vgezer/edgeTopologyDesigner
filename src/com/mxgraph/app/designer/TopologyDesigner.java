@@ -36,7 +36,7 @@ import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
 
-public class GraphEditor extends BasicGraphEditor {
+public class TopologyDesigner extends BasicGraphEditor {
 	/**
 	 * 
 	 */
@@ -57,14 +57,14 @@ public class GraphEditor extends BasicGraphEditor {
 
 	// GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/connector.gif");
 
-	public GraphEditor() {
+	public TopologyDesigner() {
 		this("Edge Topology Editor", new CustomGraphComponent(new CustomGraph()));
 	}
 
 	/**
 	 * 
 	 */
-	public GraphEditor(String appTitle, mxGraphComponent component) {
+	public TopologyDesigner(String appTitle, mxGraphComponent component) {
 		super(appTitle, component);
 		final mxGraph graph = graphComponent.getGraph();
 
@@ -91,28 +91,28 @@ public class GraphEditor extends BasicGraphEditor {
 
 		// Adds some template cells for dropping into the graph
 		shapesPalette.addTemplate("Cloud",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/cloud.png")),
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/cloud.png")),
 				"roundImage;image=/com/mxgraph/examples/swing/images/cloud.png", 50, 50, "Cloud #");
 		shapesPalette.addTemplate("Edge Node",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/microchip.png")),
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/microchip.png")),
 				"image;image=/com/mxgraph/examples/swing/images/microchip.png", 50, 50, "Edge Node #");
 		shapesPalette.addTemplate("User",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/dude3.png")),
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/dude3.png")),
 				"roundImage;image=/com/mxgraph/examples/swing/images/dude3.png", 50, 50, "User #");
 		shapesPalette.addTemplate("Raspberry Pi ",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/raspberry-pi.png")),
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/raspberry-pi.png")),
 				"image;image=/com/mxgraph/examples/swing/images/raspberry-pi.png", 50, 50, "Raspberry Pi #");
 		shapesPalette.addEdgeTemplate("Straight",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/straight.png")),
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/straight.png")),
 				"straight", 120, 120, "");
 		shapesPalette.addEdgeTemplate("Horizontal Connector",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/connect.png")), null,
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/connect.png")), null,
 				100, 100, "");
 		shapesPalette.addEdgeTemplate("Vertical Connector",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/vertical.png")),
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/vertical.png")),
 				"vertical", 100, 100, "");
 		shapesPalette.addEdgeTemplate("Entity Relation",
-				new ImageIcon(GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/entity.png")), "entity",
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/entity.png")), "entity",
 				100, 100, "");
 		
 	}
@@ -142,7 +142,7 @@ public class GraphEditor extends BasicGraphEditor {
 
 			// Loads the defalt stylesheet from an external file
 			mxCodec codec = new mxCodec();
-			Document doc = mxUtils.loadDocument(GraphEditor.class
+			Document doc = mxUtils.loadDocument(TopologyDesigner.class
 					.getResource("/com/mxgraph/examples/swing/resources/default-style.xml").toString());
 			codec.decode(doc.getDocumentElement(), graph.getStylesheet());
 
@@ -320,7 +320,7 @@ public class GraphEditor extends BasicGraphEditor {
 		mxSwingConstants.SHADOW_COLOR = Color.LIGHT_GRAY;
 		mxConstants.W3C_SHADOWCOLOR = "#D3D3D3";
 
-		GraphEditor editor = new GraphEditor();
+		TopologyDesigner editor = new TopologyDesigner();
 
 		JFrame frame = editor.createFrame(new EditorMenuBar(editor));
 		frame.setVisible(true);
