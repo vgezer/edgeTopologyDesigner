@@ -93,9 +93,9 @@ public class TopologyDesigner extends BasicGraphEditor {
 		shapesPalette.addTemplate("Cloud",
 				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/cloud.png")),
 				"roundImage;image=/com/mxgraph/examples/swing/images/cloud.png", 50, 50, "Cloud #");
-		shapesPalette.addTemplate("Edge Node",
+		shapesPalette.addTemplate("Edge Server",
 				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/microchip.png")),
-				"image;image=/com/mxgraph/examples/swing/images/microchip.png", 50, 50, "Edge Node #");
+				"image;image=/com/mxgraph/examples/swing/images/microchip.png", 50, 50, "Edge Server #");
 		shapesPalette.addTemplate("User",
 				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/dude3.png")),
 				"roundImage;image=/com/mxgraph/examples/swing/images/dude3.png", 50, 50, "User #");

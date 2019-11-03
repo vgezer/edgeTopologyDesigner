@@ -505,7 +505,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 						String[] words=((String) mxc.getValue()).split("#");
 						boolean serverAdded = false;
 						switch(words[0]){ 
-					        case "Edge Node ": 
+					        case "Edge Server ": 
 					        	mxc.setValue(words[0].concat("#" + edgeNodeId++));
 					        	serverAdded = true;
 					            break; 
