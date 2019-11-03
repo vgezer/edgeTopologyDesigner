@@ -1,6 +1,6 @@
 # Edge Topology Designer
 
-Allows creation of topologies for RTEF. The created ETD file is compatible with RTEF.
+Allows creation of topologies for RTEF [1]. The created ETD file is compatible with RTEF.
 
 <p align="center">
   <img src="docs/images/topologyDesigner.PNG" width="55%">
@@ -21,4 +21,7 @@ main method is in:
 
     com/mxgraph/app/designer/TopologyDesigner.java
 
-
+## References
+[1] Gezer, V and Ruskowski, M., *An Extensible Real-Time Capable Server Architecture for Edge Computing*, 
+Sixth International Conference on Advances in Computing, Electronics and Communication - ACEC 2017, DOI: 
+10.15224/978-1-63248-138-2-15
