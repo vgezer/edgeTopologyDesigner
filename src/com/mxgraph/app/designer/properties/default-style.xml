@@ -1,5 +1,5 @@
 <mxStylesheet>
-	<include name="/com/mxgraph/examples/swing/resources/basic-style.xml" />
+	<include name="/com/mxgraph/app/designer/properties/basic-style.xml" />
 	<add as="defaultVertex" extend="defaultVertex">
 		<add as="fillColor" value="#adc5ff" />
 		<add as="gradientColor" value="#7d85df" />

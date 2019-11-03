@@ -191,11 +191,11 @@ public class GraphConfigDialog extends JDialog {
 			panel.add(serverType);
 			panel.add(nameType);
 			panel.add(new JLabel(mxResources.get("startingNode")));
-			panel.add(new JLabel(":"));
 			panel.add(startVertexValueField);
+			panel.add(new JLabel(""));
 			panel.add(new JLabel(mxResources.get("finalNode")));
-			panel.add(new JLabel(":"));
 			panel.add(endVertexValueField);
+			panel.add(new JLabel(""));
 			JPanel panelBorder = new JPanel();
 			panelBorder.setBorder(new EmptyBorder(10, 10, 10, 10));
 			panelBorder.add(panel);
@@ -263,6 +263,8 @@ public class GraphConfigDialog extends JDialog {
 									public boolean visit(Object vertex, Object edge) {
 										mxCell v = (mxCell) vertex;
 										mxCell e = (mxCell) edge;
+										System.out.println(v.getValue());
+										System.out.println(e.getValue());
 										String eVal = "N/A";
 
 										if (e != null) {

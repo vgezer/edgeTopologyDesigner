@@ -58,7 +58,7 @@ public class TopologyDesigner extends BasicGraphEditor {
 	// GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/connector.gif");
 
 	public TopologyDesigner() {
-		this("Edge Topology Editor", new CustomGraphComponent(new CustomGraph()));
+		this("Edge Topology Designer", new CustomGraphComponent(new CustomGraph()));
 	}
 
 	/**
@@ -96,12 +96,18 @@ public class TopologyDesigner extends BasicGraphEditor {
 		shapesPalette.addTemplate("Edge Server",
 				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/microchip.png")),
 				"image;image=/com/mxgraph/examples/swing/images/microchip.png", 50, 50, "Edge Server #");
+		shapesPalette.addTemplate("Edge Server",
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/server.png")),
+				"image;image=/com/mxgraph/examples/swing/images/server.png", 50, 50, "Edge Server #");
 		shapesPalette.addTemplate("User",
 				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/dude3.png")),
 				"roundImage;image=/com/mxgraph/examples/swing/images/dude3.png", 50, 50, "User #");
-		shapesPalette.addTemplate("Raspberry Pi ",
-				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/raspberry-pi.png")),
-				"image;image=/com/mxgraph/examples/swing/images/raspberry-pi.png", 50, 50, "Raspberry Pi #");
+		shapesPalette.addTemplate("End Device ",
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/terminate.png")),
+				"image;image=/com/mxgraph/examples/swing/images/terminate.png", 50, 50, "End Device #");
+		shapesPalette.addTemplate("End Device ",
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/telephone.png")),
+				"image;image=/com/mxgraph/examples/swing/images/telephone.png", 50, 50, "End Device #");
 		shapesPalette.addEdgeTemplate("Straight",
 				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/straight.png")),
 				"straight", 120, 120, "");
@@ -143,7 +149,7 @@ public class TopologyDesigner extends BasicGraphEditor {
 			// Loads the defalt stylesheet from an external file
 			mxCodec codec = new mxCodec();
 			Document doc = mxUtils.loadDocument(TopologyDesigner.class
-					.getResource("/com/mxgraph/examples/swing/resources/default-style.xml").toString());
+					.getResource("/com/mxgraph/app/designer/properties/default-style.xml").toString());
 			codec.decode(doc.getDocumentElement(), graph.getStylesheet());
 
 			// Sets the background to white

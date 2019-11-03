@@ -517,7 +517,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 					        	mxc.setValue(words[0].concat("#" + coudId++));
 					        	serverAdded = true;
 					            break; 
-					        case "Raspberry Pi ": 
+					        case "End Device ": 
 					        	mxc.setValue(words[0].concat("#" + raspberryPiId++));
 					        	serverAdded = true;
 					            break; 

@@ -91,7 +91,7 @@ public class EditorAboutFrame extends JDialog
 		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 		content.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
-		content.add(new JLabel("Edge Topology Manager"));
+		content.add(new JLabel("Edge Topology Designer"));
 		content.add(new JLabel(" "));
 
 		content.add(new JLabel("powered by mxGraph " + mxGraph.VERSION));
@@ -99,10 +99,9 @@ public class EditorAboutFrame extends JDialog
 		content.add(new JLabel("All rights reserved."));
 		content.add(new JLabel(" "));
 		
-		content.add(new JLabel("Topology Manager Additions by:"));
-		content.add(new JLabel("DFKI GmbH"));
-		content.add(new JLabel("Trippstadter Strasse 122"));
-		content.add(new JLabel("D-67663 Kaiserslautern"));
+		content.add(new JLabel("Edge Adaptation:"));
+		content.add(new JLabel("Oussama Barbana"));
+		content.add(new JLabel("Volkan Gezer"));
 		content.add(new JLabel(" "));
 
 		try

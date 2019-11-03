@@ -313,9 +313,9 @@ public class EditorMenuBar extends JMenuBar {
 		submenu = (JMenu) menu.add(new JMenu(mxResources.get("stylesheet")));
 
 		submenu.add(editor.bind(mxResources.get("basicStyle"),
-				new StylesheetAction("/com/mxgraph/examples/swing/resources/basic-style.xml")));
+				new StylesheetAction("/com/mxgraph/app/designer/properties/basic-style.xml")));
 		submenu.add(editor.bind(mxResources.get("defaultStyle"),
-				new StylesheetAction("/com/mxgraph/examples/swing/resources/default-style.xml")));
+				new StylesheetAction("/com/mxgraph/app/designer/properties/default-style.xml")));
 
 		// Creates the options menu
 		menu = add(new JMenu(mxResources.get("options")));
