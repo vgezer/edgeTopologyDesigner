@@ -12,7 +12,7 @@ Based on [jGraphX](https://github.com/jgraph/jgraphx) library.
  - Automatically assign unique ID for each node.
  - Drag and Drop nodes to create links between them.
  - Analysis tool to measure the shortest distance between nodes.
- - Add nodes, or free-text to visualise in the editor.
+ - Add notes, or free-text to visualise in the editor.
  - Save as PNG.
  - Print the topology.
 
