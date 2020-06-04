@@ -598,7 +598,7 @@ public class EditorActions
 				mxGraph graph = graphComponent.getGraph();
 				FileFilter selectedFilter = null;
 				DefaultFileFilter mxeFile = new DefaultFileFilter(".etd",
-						"Edge Topology " + mxResources.get("file") + " (.etd)");
+						"Edge Topology Designer " + mxResources.get("file") + " (.etd)");
 				FileFilter vmlFileFilter = new DefaultFileFilter(".html",
 						"VML " + mxResources.get("file") + " (.html)");
 				String filename = null;
@@ -629,7 +629,7 @@ public class EditorActions
 
 					// Adds special vector graphics formats and HTML
 					fc.addChoosableFileFilter(new DefaultFileFilter(".txt",
-							"Graph Drawing " + mxResources.get("file")
+							"Plain Topology " + mxResources.get("file")
 									+ " (.txt)"));
 					fc.addChoosableFileFilter(new DefaultFileFilter(".png",
 						"PNG+XML " + mxResources.get("file") + " (.png)"));
@@ -755,7 +755,10 @@ public class EditorActions
 					}
 					else if (ext.equalsIgnoreCase("txt"))
 					{
-						String content = mxGdCodec.encode(graph);
+						mxCodec codec = new mxCodec();
+						String xml = mxXmlUtils.getXml(codec.encode(graph
+								.getModel()));
+						String content = mxGdCodec.encode(xml);
 
 						mxUtils.writeFile(content, filename);
 					}
@@ -1654,7 +1657,7 @@ public class EditorActions
 						fc.addChoosableFileFilter(defaultFilter);
 
 						fc.addChoosableFileFilter(new DefaultFileFilter(".etd",
-								"mxGraph Editor " + mxResources.get("file")
+								"Edge Topology Designer " + mxResources.get("file")
 										+ " (.etd)"));
 						fc.addChoosableFileFilter(new DefaultFileFilter(".png",
 								"PNG+XML  " + mxResources.get("file")
@@ -1667,7 +1670,7 @@ public class EditorActions
 
 						// Adds file filter for GD import
 						fc.addChoosableFileFilter(new DefaultFileFilter(".txt",
-								"Graph Drawing  " + mxResources.get("file")
+								"Plain Topology  " + mxResources.get("file")
 										+ " (.txt)"));
 
 						fc.setFileFilter(defaultFilter);

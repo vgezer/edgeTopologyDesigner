@@ -4,12 +4,22 @@
 package com.mxgraph.io;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mxgraph.model.mxGraphModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
 import com.mxgraph.view.mxGraph;
 
 /**
@@ -159,21 +169,63 @@ public class mxGdCodec
 	/**
 	 * Generates a GD text output with the cells in the graph.
 	 * The implementation only uses the cells located in the default parent.
-	 * @param graph Graph with the cells.
+	 * @param xml Graph with the cells.
 	 * @return The GD document generated.
 	 */
-	public static String encode(mxGraph graph)
+	public static String encode(String xml)
 	{
 		StringBuilder builder = new StringBuilder();
 		
-		Object parent = graph.getDefaultParent();
-		Object[] vertices = mxGraphModel.getChildCells(graph.getModel(), parent, true, false);
-		
-		builder.append("# Number of Nodes (0-" + String.valueOf(vertices.length - 1) + ")");
-		builder.append(String.valueOf(vertices.length));
-		
-		// TODO
+		try {
+			String nodeString = "Node";
+			String connectionString = "Connection";
 
-		return builder.toString();
+			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = db.parse(new InputSource(new StringReader(xml)));
+
+			
+			builder.append("# Topology file is converted using Edge Topology Designer\n");
+			
+			// optional, but recommended
+			// read this -
+			// http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+			doc.getDocumentElement().normalize();
+
+			final NodeList nList = doc.getElementsByTagName("mxCell");
+			log.info("Topology is converted...");
+			final HashMap<String, String> serverId = new HashMap<>();
+
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+
+				final Node nNode = nList.item(temp);
+
+				final Element eElement = (Element) nNode;
+				// If it is only a node
+				if ((nNode.getNodeType() == Node.ELEMENT_NODE) && !eElement.hasAttribute("edge")
+						&& eElement.hasAttribute("value")) {
+
+					try {
+						builder.append(nodeString + "," + eElement.getAttribute("serverid") + ","
+								+ eElement.getAttribute("value") + "," + eElement.getAttribute("warningmessage") + "\n");
+						serverId.put(eElement.getAttribute("id"), eElement.getAttribute("serverid"));
+					} catch (final Exception e) {
+						continue;
+					}
+
+				} // If it is a connection
+				else if ((nNode.getNodeType() == Node.ELEMENT_NODE) && eElement.hasAttribute("edge")) {
+					builder.append(connectionString + "," + serverId.get(eElement.getAttribute("source")) + ","
+							+ serverId.get(eElement.getAttribute("target")) + "," + eElement.getAttribute("value") + "\n");
+				}
+			}
+			log.info("Saved");
+
+			return builder.toString();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.severe("An error occurred during parsing model!");
+			return "An error occurred during parsing model!";
+		}
 	}
 }
