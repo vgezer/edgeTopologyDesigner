@@ -216,7 +216,7 @@ public class TopologyDesigner extends BasicGraphEditor {
 			String tip = "<html>";
 			mxGeometry geo = getModel().getGeometry(cell);
 			if(getModel().getServerId(cell) != null) {
-				tip += "<b>Server ID</b>: "+ getModel().getServerId(cell) + "<br>";	
+				tip += "<b>" + mxResources.get("serverId") + "</b>: "+ getModel().getServerId(cell) + "<br>";	
 			}
 			if(getModel().getWarningMessage(cell) != null) {
 				tip += "<b>Note</b>: "+ getModel().getWarningMessage(cell) + "<br>";	

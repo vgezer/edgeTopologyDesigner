@@ -215,7 +215,7 @@ public class mxGdCodec
 							serverList.add(eElement.getAttribute("serverid"));
 						}
 						else {
-							builder.append("# Following server ID (Server ID: " + eElement.getAttribute("serverid") + ") is duplicated. Please check!\n");
+							builder.append("# Following node ID (Node ID: " + eElement.getAttribute("serverid") + ") is duplicated. Please check!\n");
 						}
 						builder.append(nodeString + "," + eElement.getAttribute("serverid") + ","
 								+ value + "," + eElement.getAttribute("warningmessage") + "\n");
