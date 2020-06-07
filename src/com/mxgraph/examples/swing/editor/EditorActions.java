@@ -851,11 +851,13 @@ public class EditorActions
 		String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
 		String content = mxGdCodec.encode(xml);
 		if (content.contains("Please check!")) {
+			String getNodeName = content.substring(content.indexOf("Please check!") + "Please check!".length());
+			String duplicateNodeName = getNodeName.split(",")[2];
 			String checkFor = "# Following node ID (Node ID: ";
 			int getServerIdBegin = content.indexOf(checkFor );
 			int getServerIdLast = content.indexOf(")", content.indexOf(checkFor));
 			String getServerId = content.substring(getServerIdBegin + checkFor.length(), getServerIdLast);
-			JOptionPane.showMessageDialog(editor, mxResources.get("errorInFile", new String[] { getServerId }),
+			JOptionPane.showMessageDialog(editor, mxResources.get("errorInFile", new String[] { getServerId, duplicateNodeName }),
 					mxResources.get("duplicatedId"), JOptionPane.WARNING_MESSAGE);
 		}
 		try {
