@@ -4,7 +4,6 @@
 package com.mxgraph.io;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -194,6 +193,7 @@ public class mxGdCodec
 			final NodeList nList = doc.getElementsByTagName("mxCell");
 			log.info("Topology is converted...");
 			final HashMap<String, String> serverId = new HashMap<>();
+			final ArrayList<String> serverList = new ArrayList<String>();
 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 
@@ -211,9 +211,16 @@ public class mxGdCodec
 						&& eElement.hasAttribute("value")) {
 					
 					try {
+						if(!serverList.contains(eElement.getAttribute("serverid"))) {
+							serverList.add(eElement.getAttribute("serverid"));
+						}
+						else {
+							builder.append("# Following server ID (Server ID: " + eElement.getAttribute("serverid") + ") is duplicated. Please check!\n");
+						}
 						builder.append(nodeString + "," + eElement.getAttribute("serverid") + ","
 								+ value + "," + eElement.getAttribute("warningmessage") + "\n");
 						serverId.put(eElement.getAttribute("id"), eElement.getAttribute("serverid"));
+						
 					} catch (final Exception e) {
 						continue;
 					}

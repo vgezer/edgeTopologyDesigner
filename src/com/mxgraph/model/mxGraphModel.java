@@ -116,7 +116,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 	 * Specifies the next userId, coudId, edgeNodeId and raspberryPiId to be created. Initial value is 0.
 	 */
 	
-	protected int userId, coudId, edgeNodeId, raspberryPiId = 0;
+	protected int userId, cloudId, edgeNodeId, endDeviceId = 0;
 
 	/**
 	 * Holds the changes for the current transaction. If the transaction is
@@ -515,11 +515,11 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 								serverAdded = true;
 								break;
 							case "Cloud ":
-								mxc.setValue(words[0].concat("#" + coudId++));
+								mxc.setValue(words[0].concat("#" + cloudId++));
 								serverAdded = true;
 								break;
 							case "End Device ":
-								mxc.setValue(words[0].concat("#" + raspberryPiId++));
+								mxc.setValue(words[0].concat("#" + endDeviceId++));
 								serverAdded = true;
 								break;
 							default:
@@ -807,7 +807,7 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
                 input = JOptionPane.showInputDialog(null, mxResources.get("enterDistance", 
                 		new String[] {((mxCell) source).getValue().toString(), ((mxCell) target).getValue().toString()}));
                 if (input == null) {
-                	this.cellRemoved(edge);
+                	this.remove(target);
                 	break;
                 }
                 else if (input.matches("[0-9]+(\\.){0,1}[0-9]*")) {
@@ -817,7 +817,6 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
                 }
             } while (!input.matches("[0-9]+(\\.){0,1}[0-9]*"));
             
-         
 			((mxCell) edge).setValue(string);
 			
 		

@@ -16,6 +16,7 @@ Based on [jGraphX](https://github.com/jgraph/jgraphx) library.
  - Add notes, or free-text to visualise in the editor.
  - Save as PNG or as a plain topology format.
  - Print the topology.
+ - Ability to set an automatic layout (Hierarchical, Stack, Circle, etc.) analysing connections.
 
 ## Execution
 

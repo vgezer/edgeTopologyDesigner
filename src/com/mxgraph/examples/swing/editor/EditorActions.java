@@ -538,18 +538,7 @@ public class EditorActions
 					return;
 				}
 				
-				JOptionPane.showMessageDialog(editor, mxResources.get("loseDetails"), mxResources.get("backupRecommended"),
-						JOptionPane.INFORMATION_MESSAGE);
-				mxCodec codec = new mxCodec();
-				String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
-				String content = mxGdCodec.encode(xml);
-
-				try {
-					mxUtils.writeFile(content, filename);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				plainSave(editor, graph, filename);
 			}
 			else {
 				new SaveAction(true).actionPerformed(e);
@@ -803,14 +792,7 @@ public class EditorActions
 					}
 					else if (ext.equalsIgnoreCase("txt"))
 					{
-						JOptionPane.showMessageDialog(editor,
-										mxResources.get("loseDetails"), mxResources.get("backupRecommended"), JOptionPane.INFORMATION_MESSAGE);
-							mxCodec codec = new mxCodec();
-							String xml = mxXmlUtils.getXml(codec.encode(graph
-									.getModel()));
-							String content = mxGdCodec.encode(xml);
-
-							mxUtils.writeFile(content, filename);
+						plainSave(editor, graph, filename);
 					}
 					else
 					{
@@ -858,6 +840,28 @@ public class EditorActions
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
+		}
+
+	}
+	
+	private static void plainSave(BasicGraphEditor editor, mxGraph graph, String filename) {
+		JOptionPane.showMessageDialog(editor, mxResources.get("loseDetails"), mxResources.get("backupRecommended"),
+				JOptionPane.INFORMATION_MESSAGE);
+		mxCodec codec = new mxCodec();
+		String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
+		String content = mxGdCodec.encode(xml);
+		if (content.contains("Please check!")) {
+			int getServerIdBegin = content.indexOf("# Following server ID (Server ID: ");
+			int getServerIdLast = content.indexOf(")", content.indexOf("# Following server ID (Server ID: "));
+			String getServerId = content.substring(getServerIdBegin + 34, getServerIdLast);
+			JOptionPane.showMessageDialog(editor, mxResources.get("errorInFile", new String[] { getServerId }),
+					mxResources.get("duplicatedId"), JOptionPane.WARNING_MESSAGE);
+		}
+		try {
+			mxUtils.writeFile(content, filename);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
