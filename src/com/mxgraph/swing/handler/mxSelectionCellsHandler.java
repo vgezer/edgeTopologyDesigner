@@ -165,7 +165,7 @@ public class mxSelectionCellsHandler implements MouseListener,
 			graph.getView().addListener(mxEvent.DOWN, refreshHandler);
 			graph.getView().addListener(mxEvent.UP, refreshHandler);
 
-			// Refreshes the handles if moveVertexLabels or moveEdgeLabels changes
+			// Refreshes the handles if moveConnectionLabels or moveEdgeLabels changes
 			graph.addPropertyChangeListener(labelMoveHandler);
 		}
 	}
@@ -187,7 +187,7 @@ public class mxSelectionCellsHandler implements MouseListener,
 			graph.getView().removeListener(refreshHandler, mxEvent.DOWN);
 			graph.getView().removeListener(refreshHandler, mxEvent.UP);
 
-			// Refreshes the handles if moveVertexLabels or moveEdgeLabels changes
+			// Refreshes the handles if moveConnectionLabels or moveEdgeLabels changes
 			graph.removePropertyChangeListener(labelMoveHandler);
 		}
 	}

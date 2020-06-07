@@ -385,8 +385,8 @@ public class EditorMenuBar extends JMenuBar {
 
 		submenu.addSeparator();
 
-		submenu.add(new TogglePropertyItem(graph, mxResources.get("moveEdgeLabels"), "EdgeLabelsMovable"));
-		submenu.add(new TogglePropertyItem(graph, mxResources.get("moveVertexLabels"), "VertexLabelsMovable"));
+		submenu.add(new TogglePropertyItem(graph, mxResources.get("moveConnectionLabels"), "EdgeLabelsMovable"));
+		submenu.add(new TogglePropertyItem(graph, mxResources.get("moveEdgeLabels"), "VertexLabelsMovable"));
 
 		submenu.addSeparator();
 
@@ -397,7 +397,7 @@ public class EditorMenuBar extends JMenuBar {
 		submenu = (JMenu) menu.add(new JMenu(mxResources.get("connections")));
 
 		submenu.add(new TogglePropertyItem(graphComponent, mxResources.get("connectable"), "Connectable"));
-		submenu.add(new TogglePropertyItem(graph, mxResources.get("connectableEdges"), "ConnectableEdges"));
+		submenu.add(new TogglePropertyItem(graph, mxResources.get("connectableConnections"), "ConnectableEdges"));
 
 		submenu.addSeparator();
 
@@ -410,8 +410,8 @@ public class EditorMenuBar extends JMenuBar {
 
 		submenu = (JMenu) menu.add(new JMenu(mxResources.get("validation")));
 
-		submenu.add(new TogglePropertyItem(graph, mxResources.get("allowDanglingEdges"), "AllowDanglingEdges"));
-		submenu.add(new TogglePropertyItem(graph, mxResources.get("cloneInvalidEdges"), "CloneInvalidEdges"));
+		submenu.add(new TogglePropertyItem(graph, mxResources.get("allowDanglingConnections"), "AllowDanglingEdges"));
+		submenu.add(new TogglePropertyItem(graph, mxResources.get("cloneInvalidConnections"), "CloneInvalidEdges"));
 
 		submenu.addSeparator();
 
