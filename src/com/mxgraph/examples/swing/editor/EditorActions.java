@@ -511,6 +511,54 @@ public class EditorActions
 			}
 		}
 	}
+	
+	@SuppressWarnings("serial")
+	public static class SaveAsTxtAction extends AbstractAction {
+
+		/**
+		 * 
+		 */
+		protected String lastDir;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			BasicGraphEditor editor = getEditor(e);
+			mxGraphComponent graphComponent = editor.getGraphComponent();
+			mxGraph graph = graphComponent.getGraph();
+
+			if(editor.getCurrentFile() != null) {
+				String filename = editor.getCurrentFile().getAbsolutePath();
+				String fileWithoutExtension = filename
+						.substring(0, filename.lastIndexOf('.'));
+				filename = fileWithoutExtension + ".txt";
+				if (new File(filename).exists()
+						&& JOptionPane.showConfirmDialog(graphComponent,
+								mxResources.get("overwriteExistingFile")) != JOptionPane.YES_OPTION)
+				{
+					return;
+				}
+				
+				JOptionPane.showMessageDialog(editor, mxResources.get("loseDetails"), mxResources.get("backupRecommended"),
+						JOptionPane.INFORMATION_MESSAGE);
+				mxCodec codec = new mxCodec();
+				String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
+				String content = mxGdCodec.encode(xml);
+
+				try {
+					mxUtils.writeFile(content, filename);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else {
+				new SaveAction(true).actionPerformed(e);
+			}
+
+
+		}
+
+	}
 
 	/**
 	 *
@@ -755,12 +803,14 @@ public class EditorActions
 					}
 					else if (ext.equalsIgnoreCase("txt"))
 					{
-						mxCodec codec = new mxCodec();
-						String xml = mxXmlUtils.getXml(codec.encode(graph
-								.getModel()));
-						String content = mxGdCodec.encode(xml);
+						JOptionPane.showMessageDialog(editor,
+										mxResources.get("loseDetails"), mxResources.get("backupRecommended"), JOptionPane.INFORMATION_MESSAGE);
+							mxCodec codec = new mxCodec();
+							String xml = mxXmlUtils.getXml(codec.encode(graph
+									.getModel()));
+							String content = mxGdCodec.encode(xml);
 
-						mxUtils.writeFile(content, filename);
+							mxUtils.writeFile(content, filename);
 					}
 					else
 					{
@@ -1669,9 +1719,9 @@ public class EditorActions
 										+ " (.vdx)"));
 
 						// Adds file filter for GD import
-						fc.addChoosableFileFilter(new DefaultFileFilter(".txt",
-								"Plain Topology  " + mxResources.get("file")
-										+ " (.txt)"));
+//						fc.addChoosableFileFilter(new DefaultFileFilter(".txt",
+//								"Plain Topology  " + mxResources.get("file")
+//										+ " (.txt)"));
 
 						fc.setFileFilter(defaultFilter);
 

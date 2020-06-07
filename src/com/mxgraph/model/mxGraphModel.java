@@ -502,27 +502,30 @@ public class mxGraphModel extends mxEventSource implements mxIGraphModel,
 					
 					if (mxc.getValue() != null)
 					{
-						String[] words=((String) mxc.getValue()).split("#");
+						String[] words = ((String) mxc.getValue()).split("#");
 						boolean serverAdded = false;
-						switch(words[0]){ 
-					        case "Edge Server ": 
-					        	mxc.setValue(words[0].concat("#" + edgeNodeId++));
-					        	serverAdded = true;
-					            break; 
-					        case "User ": 
-					        	mxc.setValue(words[0].concat("#" + userId++));
-					        	serverAdded = true;
-					            break; 
-					        case "Cloud ": 
-					        	mxc.setValue(words[0].concat("#" + coudId++));
-					        	serverAdded = true;
-					            break; 
-					        case "End Device ": 
-					        	mxc.setValue(words[0].concat("#" + raspberryPiId++));
-					        	serverAdded = true;
-					            break; 
-					        default: 
-				        }
+						if (words.length <= 1) {
+							switch (words[0]) {
+							case "Edge Server ":
+								mxc.setValue(words[0].concat("#" + edgeNodeId++));
+								serverAdded = true;
+								break;
+							case "User ":
+								mxc.setValue(words[0].concat("#" + userId++));
+								serverAdded = true;
+								break;
+							case "Cloud ":
+								mxc.setValue(words[0].concat("#" + coudId++));
+								serverAdded = true;
+								break;
+							case "End Device ":
+								mxc.setValue(words[0].concat("#" + raspberryPiId++));
+								serverAdded = true;
+								break;
+							default:
+							}
+						}
+
 						if(serverAdded) {
 							if(mxc.getServerid() == null) {
 								execute(new mxServerIdChange(this, mxc, (nextId-3)));

@@ -35,6 +35,7 @@ import com.mxgraph.examples.swing.editor.EditorActions.PrintAction;
 import com.mxgraph.examples.swing.editor.EditorActions.PromptPropertyAction;
 import com.mxgraph.examples.swing.editor.EditorActions.PromptValueAction;
 import com.mxgraph.examples.swing.editor.EditorActions.SaveAction;
+import com.mxgraph.examples.swing.editor.EditorActions.SaveAsTxtAction;
 import com.mxgraph.examples.swing.editor.EditorActions.ScaleAction;
 import com.mxgraph.examples.swing.editor.EditorActions.SelectShortestPathAction;
 import com.mxgraph.examples.swing.editor.EditorActions.SelectSpanningTreeAction;
@@ -92,6 +93,8 @@ public class EditorMenuBar extends JMenuBar {
 				"/com/mxgraph/examples/swing/images/save.gif"));
 		menu.add(editor.bind(mxResources.get("saveAs"), new SaveAction(true),
 				"/com/mxgraph/examples/swing/images/saveas.gif"));
+		menu.add(editor.bind(mxResources.get("saveAsPlain") + " " + mxResources.get("file"), new SaveAsTxtAction(),
+				"/com/mxgraph/examples/swing/images/middle.gif"));
 
 		menu.addSeparator();
 

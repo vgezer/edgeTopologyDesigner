@@ -22,6 +22,7 @@ import com.mxgraph.examples.swing.editor.EditorActions.NewAction;
 import com.mxgraph.examples.swing.editor.EditorActions.OpenAction;
 import com.mxgraph.examples.swing.editor.EditorActions.PrintAction;
 import com.mxgraph.examples.swing.editor.EditorActions.SaveAction;
+import com.mxgraph.examples.swing.editor.EditorActions.SaveAsTxtAction;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxGraphActions;
 import com.mxgraph.util.mxConstants;
@@ -64,6 +65,8 @@ public class EditorToolBar extends JToolBar
 				"/com/mxgraph/examples/swing/images/open.gif"));
 		add(editor.bind("Save", new SaveAction(false),
 				"/com/mxgraph/examples/swing/images/save.gif"));
+		add(editor.bind(mxResources.get("saveAsPlain"), new SaveAsTxtAction(),
+				"/com/mxgraph/examples/swing/images/middle.gif"));
 
 		addSeparator();
 

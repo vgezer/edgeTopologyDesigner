@@ -200,13 +200,19 @@ public class mxGdCodec
 				final Node nNode = nList.item(temp);
 
 				final Element eElement = (Element) nNode;
+				
+				// Remove new lines
+				String value = eElement.getAttribute("value");
+				value = value.replace("\n", "");
+				value = value.replace("\r", "");
+				
 				// If it is only a node
 				if ((nNode.getNodeType() == Node.ELEMENT_NODE) && !eElement.hasAttribute("edge")
 						&& eElement.hasAttribute("value")) {
-
+					
 					try {
 						builder.append(nodeString + "," + eElement.getAttribute("serverid") + ","
-								+ eElement.getAttribute("value") + "," + eElement.getAttribute("warningmessage") + "\n");
+								+ value + "," + eElement.getAttribute("warningmessage") + "\n");
 						serverId.put(eElement.getAttribute("id"), eElement.getAttribute("serverid"));
 					} catch (final Exception e) {
 						continue;
@@ -215,7 +221,7 @@ public class mxGdCodec
 				} // If it is a connection
 				else if ((nNode.getNodeType() == Node.ELEMENT_NODE) && eElement.hasAttribute("edge")) {
 					builder.append(connectionString + "," + serverId.get(eElement.getAttribute("source")) + ","
-							+ serverId.get(eElement.getAttribute("target")) + "," + eElement.getAttribute("value") + "\n");
+							+ serverId.get(eElement.getAttribute("target")) + "," + value + "\n");
 				}
 			}
 			log.info("Saved");
