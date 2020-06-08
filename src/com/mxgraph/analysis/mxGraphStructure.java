@@ -43,6 +43,9 @@ public class mxGraphStructure
 
 		//data preparation
 		int connectedVertices = 1;
+		if(vertexNum < 1) {
+			return true;
+		}
 		int[] visited = new int[vertexNum];
 		visited[0] = 1;
 
