@@ -1,6 +1,7 @@
 package com.mxgraph.examples.swing.editor;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -642,7 +643,7 @@ public class BasicGraphEditor extends JPanel
 	public Action bind(String name, final Action action, String iconUrl)
 	{
 		AbstractAction newAction = new AbstractAction(name, (iconUrl != null) ? new ImageIcon(
-				BasicGraphEditor.class.getResource(iconUrl)) : null)
+				new ImageIcon(BasicGraphEditor.class.getResource(iconUrl)).getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT)) : null)
 		{
 			public void actionPerformed(ActionEvent e)
 			{

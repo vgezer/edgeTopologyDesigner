@@ -53,12 +53,16 @@ public class EditorPopupMenu extends JPopupMenu
 		addSeparator();
 
 		// Creates the format menu
-		JMenu menu = (JMenu) add(new JMenu(mxResources.get("format")));
+		JMenu formatMenu = new JMenu(mxResources.get("format"));
+		formatMenu.setEnabled(selected);
+		JMenu menu = (JMenu) add(formatMenu);
 
 		EditorMenuBar.populateFormatMenu(menu, editor);
 
 		// Creates the shape menu
-		menu = (JMenu) add(new JMenu(mxResources.get("shape")));
+		JMenu shapeMenu = new JMenu(mxResources.get("shape"));
+		shapeMenu.setEnabled(selected);
+		menu = (JMenu) add(shapeMenu);
 
 		EditorMenuBar.populateShapeMenu(menu, editor);
 
@@ -72,9 +76,9 @@ public class EditorPopupMenu extends JPopupMenu
 				"/com/mxgraph/examples/swing/images/rule.gif")).setEnabled(onlyOneSelected);
 		addSeparator();
 
-		add(editor.bind(mxResources.get("selectVertices"), mxGraphActions
-				.getSelectVerticesAction()));
 		add(editor.bind(mxResources.get("selectEdges"), mxGraphActions
+				.getSelectVerticesAction()));
+		add(editor.bind(mxResources.get("selectVertices"), mxGraphActions
 				.getSelectEdgesAction()));
 
 		addSeparator();

@@ -53,6 +53,7 @@
 	</add>
 	<add as="straight">
 		<add as="shape" value="connector" />
+		<add as="startArrow" value="classic" />
 		<add as="endArrow" value="classic" />
 		<add as="edgeStyle" value="none" />
 	</add>
