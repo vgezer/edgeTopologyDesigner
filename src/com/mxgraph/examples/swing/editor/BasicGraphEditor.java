@@ -571,9 +571,8 @@ public class BasicGraphEditor extends JPanel
 	public void setModified(boolean modified)
 	{
 		boolean oldValue = this.modified;
-		
 		firePropertyChange("modified", oldValue, modified);
-
+		this.modified = modified;
 		if (oldValue != modified)
 		{
 			updateTitle();
@@ -845,6 +844,7 @@ public class BasicGraphEditor extends JPanel
 						});
 
 						morph.startAnimation();
+						graph.getModel().endUpdate();
 					}
 
 				}
