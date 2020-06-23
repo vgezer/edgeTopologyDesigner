@@ -979,13 +979,15 @@ public class EditorMenuBar extends JMenuBar {
 					{
 						
 						status = mxResources.get("connected");
+						JOptionPane.showMessageDialog(null, mxResources.get("diagramStatus", new String[] {status}), mxResources.get("information"),
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 					else
 					{
-						status = mxResources.get("notconnected");
+						JOptionPane.showMessageDialog(null, mxResources.get("notConnected"), mxResources.get("error"), 
+								JOptionPane.ERROR_MESSAGE);
 					}
-					JOptionPane.showMessageDialog(null, mxResources.get("diagramStatus", new String[] {status}), mxResources.get("information"),
-							JOptionPane.INFORMATION_MESSAGE);
+
 				}
 				else if (analyzeType == AnalyzeType.IS_SIMPLE)
 				{

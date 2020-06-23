@@ -208,7 +208,7 @@ public class mxGdCodec
 				
 				// If it is only a node
 				if ((nNode.getNodeType() == Node.ELEMENT_NODE) && !eElement.hasAttribute("edge")
-						&& eElement.hasAttribute("value")) {
+						&& eElement.hasAttribute("value") && eElement.hasAttribute("serverid")) {
 					
 					try {
 						if(!serverList.contains(eElement.getAttribute("serverid"))) {

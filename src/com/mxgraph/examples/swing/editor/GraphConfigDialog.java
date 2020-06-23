@@ -12,6 +12,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -224,7 +225,7 @@ public class GraphConfigDialog extends JDialog {
 
 					// Fetch All Vertices
 					Object[] vertex = aGraph.getChildVertices(graph.getDefaultParent());
-
+System.out.println("all vertices: " + Arrays.toString(vertex));
 					// Loop through all Vertices
 					for (int i = 0; i < vertex.length; i++) {
 

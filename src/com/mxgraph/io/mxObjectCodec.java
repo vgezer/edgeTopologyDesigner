@@ -101,6 +101,8 @@ public class mxObjectCodec
 	public mxObjectCodec(Object template, String[] exclude, String[] idrefs,
 			Map<String, String> mapping)
 	{
+		System.setProperty("java.util.logging.SimpleFormatter.format",
+				"[%1$tF %1$tT] [%4$-7s] %5$s [Source: %2$s] %n");
 		this.template = template;
 
 		if (exclude != null)
@@ -666,7 +668,7 @@ public class mxObjectCodec
 
 		// Tries to get cached field
 		Field field = map.get(fieldname);
-
+		
 		if (field != null)
 		{
 			return field;
@@ -693,7 +695,7 @@ public class mxObjectCodec
 			type = type.getSuperclass();
 		}
 
-		log.severe("Field " + fieldname + " not found in " + obj);
+		//log.severe("Field " + fieldname + " not found in " + obj);
 		return null;
 	}
 
@@ -806,7 +808,6 @@ public class mxObjectCodec
 		if (obj != null && fieldname != null)
 		{
 			Field field = getField(obj, fieldname);
-
 			try
 			{
 				if (field != null)

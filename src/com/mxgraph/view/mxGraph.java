@@ -5119,7 +5119,7 @@ public class mxGraph extends mxEventSource
 		{
 			return "";
 		}
-
+		
 		// Checks if the connection is generally allowed
 		if (!isValidConnection(source, target))
 		{
@@ -7033,7 +7033,20 @@ public class mxGraph extends mxEventSource
 		{
 			if (isCellVisible(cells[i]))
 			{
-				result.add(cells[i]);
+				if(model.getServerId(cells[i]) == null) { // if server id is null, it is a group
+					
+					int groupChildrenCount = model.getChildCount(cells[i]); // get each group child to parse as a node
+					for (int j = 0; j < groupChildrenCount; j++) {
+						mxCell currentGroupChild = ((mxCell)model.getChildAt(cells[i], j));
+						if(currentGroupChild.getServerid() != null) {
+							result.add(currentGroupChild);
+						}
+					}
+				}
+				else {
+					result.add(cells[i]);	
+				}
+				
 			}
 		}
 

@@ -366,7 +366,13 @@ public class mxGraphStructure
 		{
 			Object sourceVertex = components[i - 1][(int) Math.round(Math.random() * (components[i - 1].length - 1))];
 			Object targetVertex = components[i][(int) Math.round(Math.random() * (components[i].length - 1))];
-			graph.insertEdge(parent, null, aGraph.getGenerator().getNewEdgeValue(aGraph), sourceVertex, targetVertex);
+			if(((mxCell)targetVertex).getServerid() != null) {
+				graph.insertEdge(parent, null, aGraph.getGenerator().getNewEdgeValue(aGraph), sourceVertex, targetVertex);	
+			}
+			else {
+				System.out.println("NULL FOUND");
+			}
+			
 		}
 	};
 
