@@ -102,7 +102,7 @@ public class mxObjectCodec
 			Map<String, String> mapping)
 	{
 		System.setProperty("java.util.logging.SimpleFormatter.format",
-				"[%1$tF %1$tT] [%4$-7s] %5$s [Source: %2$s] %n");
+				"[%1$tF %1$tT] [%4$-7s] %5$s %n"); //  [Source: %2$s] %n
 		this.template = template;
 
 		if (exclude != null)
