@@ -67,6 +67,7 @@ public class EditorPopupMenu extends JPopupMenu
 		EditorMenuBar.populateShapeMenu(menu, editor);
 
 		addSeparator();
+		
 
 		add(editor.bind(mxResources.get("edit"), mxGraphActions
 						.getEditAction())).setEnabled(onlyOneSelected);

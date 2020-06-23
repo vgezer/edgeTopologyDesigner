@@ -567,7 +567,7 @@ public class EditorMenuBar extends JMenuBar {
 			
 			JMenu submenu = (JMenu) menu.add(new JMenu(menuText));
 			
-			String relativeImagePath = "/com/mxgraph/examples/swing/images/";
+			String relativeImagePath = "/com/mxgraph/examples/swing/images/node/";
 			
 			String path = EditorMenuBar.class.getProtectionDomain().getCodeSource().getLocation().getPath() + relativeImagePath;
 			
@@ -643,7 +643,7 @@ public class EditorMenuBar extends JMenuBar {
 
 		submenu.addSeparator();
 
-		populateImageMenu(submenu, editor, 0);
+		populateImageMenu(menu, editor, 0);
 		
 		submenu.add(editor.bind(mxResources.get("shadow"), new ToggleAction(mxConstants.STYLE_SHADOW)));
 

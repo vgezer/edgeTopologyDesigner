@@ -91,23 +91,23 @@ public class TopologyDesigner extends BasicGraphEditor {
 
 		// Adds some template cells for dropping into the graph
 		shapesPalette.addTemplate("Cloud",
-				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/cloud.png")),
-				"roundImage;image=/com/mxgraph/examples/swing/images/cloud.png", 50, 50, "Cloud #");
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/node/cloud.png")),
+				"roundImage;image=/com/mxgraph/examples/swing/images/node/cloud.png", 50, 50, "Cloud #");
 		shapesPalette.addTemplate("Edge Server",
-				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/microchip.png")),
-				"image;image=/com/mxgraph/examples/swing/images/microchip.png", 50, 50, "Edge Server #");
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/node/microchip.png")),
+				"image;image=/com/mxgraph/examples/swing/images/node/microchip.png", 50, 50, "Edge Server #");
 		shapesPalette.addTemplate("Edge Server",
-				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/server.png")),
-				"image;image=/com/mxgraph/examples/swing/images/server.png", 50, 50, "Edge Server #");
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/node/server.png")),
+				"image;image=/com/mxgraph/examples/swing/images/node/server.png", 50, 50, "Edge Server #");
 		shapesPalette.addTemplate("User",
-				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/dude3.png")),
-				"roundImage;image=/com/mxgraph/examples/swing/images/dude3.png", 50, 50, "User #");
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/node/person.png")),
+				"roundImage;image=/com/mxgraph/examples/swing/images/node/person.png", 50, 50, "User #");
 		shapesPalette.addTemplate("End Device ",
-				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/terminate.png")),
-				"image;image=/com/mxgraph/examples/swing/images/terminate.png", 50, 50, "End Device #");
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/node/terminate.png")),
+				"image;image=/com/mxgraph/examples/swing/images/node/terminate.png", 50, 50, "End Device #");
 		shapesPalette.addTemplate("End Device ",
-				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/telephone.png")),
-				"image;image=/com/mxgraph/examples/swing/images/telephone.png", 50, 50, "End Device #");
+				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/node/telephone.png")),
+				"image;image=/com/mxgraph/examples/swing/images/node/telephone.png", 50, 50, "End Device #");
 		shapesPalette.addEdgeTemplate("Straight",
 				new ImageIcon(TopologyDesigner.class.getResource("/com/mxgraph/examples/swing/images/straight.png")),
 				"straight", 120, 120, "");
