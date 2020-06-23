@@ -4,7 +4,7 @@ Allows creation of topologies for RTEF [1]. The created ETD file is compatible w
 Based on [jGraphX](https://github.com/jgraph/jgraphx) library.
 
 <p align="center">
-  <img src="docs/images/topologyDesigner.PNG" width="55%">
+  <img src="docs/images/topologyDesigner.PNG" width="80%">
 </p>
 
 Get latest executable from [here](https://github.com/vgezer/edgeTopologyDesigner/releases/latest).
