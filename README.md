@@ -7,8 +7,6 @@ Based on [jGraphX](https://github.com/jgraph/jgraphx) library.
   <img src="docs/images/topologyDesigner.PNG" width="80%">
 </p>
 
-Get latest executable from [here](https://github.com/vgezer/edgeTopologyDesigner/releases/latest).
-
 ## Features:
 
  - Automatically assign unique ID for each node.
@@ -27,7 +25,12 @@ See a 3-minute YouTube Video for major features:
 	<a href="https://youtu.be/gANIcqrewVQ"><img src="http://img.youtube.com/vi/gANIcqrewVQ/0.jpg" width="55%"></a>
 </p>
 
-## Execution
+## Download
+
+Get latest executable from [here](https://github.com/vgezer/edgeTopologyDesigner/releases/latest).
+
+
+## Execution from Source
 
 main method is in:
 
